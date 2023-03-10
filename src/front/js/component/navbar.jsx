@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/component.css";
 import logo from "../store/resources/logooval.png";
+import { Acceder } from "./acceder.jsx";
 
 export const Navbar = () => {
   return (
@@ -13,7 +14,7 @@ export const Navbar = () => {
       </div>
 
       <div className="registro ml-5 w-75 text-end">
-        <div className="myinputs m-2">
+        {/* <div className="myinputs m-2">
           <div className="input1 m-1">
             <label htmlFor="" className="Email">
               <span>
@@ -45,7 +46,8 @@ export const Navbar = () => {
               <strong>Registro</strong>
             </span>
           </button>
-        </Link>
+        </Link> */}
+        <Acceder />
       </div>
 
       <div className="flags w-25 mt-1 me-3 text-end ">
