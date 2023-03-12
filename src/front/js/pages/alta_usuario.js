@@ -1,17 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../../styles/component.css";
-import logo from "../store/resources/logooval.png";
-import { Acceder } from "./acceder.jsx";
+import "../../styles/home.css";
+// import "../../styles/component.css";
+// import logo from "../store/resources/logooval.png"; Hablar con Carlos sobre el logo
 
-export const Alta = () => {
+export const Alta_usuario = () => {
   return (
     <nav className="barra d-flex w-100">
-      <div className="logocont m-2 w-75 flex-grow-1 ">
+      {/* <div className="logocont m-2 w-75 flex-grow-1 "> comentado hasta resolver tema logo
         <Link to="/">
           <img className=" logo " src={logo} />
         </Link>
-      </div>
+      </div> */}
 
       <div className="registro ml-5 w-75 text-end">
         {/* <div className="myinputs m-2">
