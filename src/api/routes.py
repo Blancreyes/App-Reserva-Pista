@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Reservas
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -21,6 +21,31 @@ def handle_hello():
     return jsonify(response_body), 200
 
 #Generate endpoints
+@api.route('/user', methods=['POST'])
+def handle_create_user():
+    #se debe pasar la información a formato json
+    request_body=request.json
+    
+    #se verifica si el usuario ya existe
+    user_info_query=User.query.filter_by(email=request_body["email"]).first()
+    
+    #Si el usuario no existe, entonces se crea usuario
+    if user_info_query is None:
+        user=User(
+            email=request_body["email"],
+            password=request_body["password"]
+        )
+        
+        db.session.add(user)
+        db.session.commit()
+        response_body = {
+            "msg": "usuario creado correctamente"
+        }
+        return jsonify(response_body), 200
+    
+    else:
+        return jsonify("Este usaurio ya existe"), 400
+        
 
 # Create a route to authenticate your users and return JWTs. The
 # create_access_token() function is used to actually generate the JWT.
@@ -51,3 +76,30 @@ def get_profile():
     current_user = get_jwt_identity()
     user = User.query.filter_by(email=current_user).first()
     return jsonify({"result":user.serialize()}), 200
+
+#Endpoint para crear las reservas
+@api.route('/reservas', methods=['POST'])
+def handle_create_reservas():
+    #se debe pasar la información a formato json
+    request_body=request.json
+    
+    #se verifica si la reserva ya existe
+    reservas_info_query=Reservas.query.filter_by(startTime=request_body["startTime"], user_id=request_body["user_id"]).first()
+    
+    #Si la reserva no existe, entonces se crea reserva
+    if reservas_info_query is None:
+        reservas=Reservas(
+            user_id=request_body["user_id"],
+            pistas_id=request_body["pistas_id"],
+            startTime=request_body["startTime"]
+        )
+        
+        db.session.add(reservas)
+        db.session.commit()
+        response_body = {
+            "msg": "Reserva creada correctamente"
+        }
+        return jsonify(response_body), 200
+    
+    else:
+        return jsonify("Esta reserva ya existe"), 400
