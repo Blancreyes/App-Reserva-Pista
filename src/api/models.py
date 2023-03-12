@@ -47,8 +47,7 @@ class Reservas(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
         nullable=False)
     pistas_id=db.Column(db.Integer, db.ForeignKey('pistas.id'),nullable=False)
-    startDate = db.Column(db.DateTime(), unique=True, nullable=False)
-    endDate = db.Column(db.DateTime(), unique=True, nullable=False)
+    startTime = db.Column(db.DateTime(), unique=True, nullable=False)
     # is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
     def __repr__(self):
@@ -57,6 +56,7 @@ class Reservas(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "startDate": self.startDate,
-            "endDate": self.endDate,
+            "user_id" : self.user_id,
+            "pistas_id" : self.pistas_id,
+            "startTime": self.startTime
         }
