@@ -5,6 +5,8 @@ db = SQLAlchemy()
 class User(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), unique=True)
+    lastname = db.Column(db.String(120), unique=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
     # is_active = db.Column(db.Boolean(), unique=False, nullable=False)
@@ -18,6 +20,8 @@ class User(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "name":self.name,
+            "lastname":self.lastname,
             "email": self.email,
             "reservas":self.reservas,
             # do not serialize the password, its a security breach
@@ -46,7 +50,7 @@ class Reservas(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
         nullable=False)
-    pistas_id=db.Column(db.Integer, db.ForeignKey('pistas.id'),nullable=False)
+    pistas_id=db.Column(db.Integer, db.ForeignKey('pistas.id'), nullable=False)
     startTime = db.Column(db.DateTime(), unique=True, nullable=False)
     # is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 

@@ -14,8 +14,8 @@ def setup_admin(app):
         form_columns = ("user_id", "pistas_id", "startTime")
         column_hide_backrefs = False
     class UserAdmin(ModelView):
-        column_list = ("id", "email", "password")
-        form_columns = ("email", "password", "reservas")
+        column_list = ("id", "name", "lastname", "email", "password")
+        form_columns = ("name", "lastname", "email", "password", "reservas")
         column_hide_backrefs = False
     # Add your models here, for example this is how we add a the User model to the admin
     admin.add_view(UserAdmin(User, db.session))
