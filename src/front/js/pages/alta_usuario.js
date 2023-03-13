@@ -1,4 +1,5 @@
 import React from "react";
+import "../../styles/component.css";
 
 export const Alta_usuario = () => {
   return (
@@ -37,16 +38,12 @@ export const Alta_usuario = () => {
         </div>
       </div>
       <div className="d-grid gap-2 col-5 mx-auto my-3">
-        <button className="btn btn-success  fw-bold" type="button">
+        <button
+          id="boton-guardar"
+          className="btn btn-success  fw-bold"
+          type="button"
+        >
           GUARDAR
-        </button>
-      </div>
-      <div className=" d-flex justify-content-center">
-        <button className="col-2 btn btn-success me-md-2 fw-bold" type="button">
-          EDITAR
-        </button>
-        <button className="col-2 btn btn-success fw-bold" type="button">
-          BAJA
         </button>
       </div>
     </div>
