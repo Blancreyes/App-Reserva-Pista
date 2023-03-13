@@ -1,22 +1,54 @@
-import React, { useContext } from "react";
-import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
-import "../../styles/home.css";
-import fondo from "../store/resources/teniscourt2.jpg";
+import React from "react";
 
 export const Alta_usuario = () => {
-  const { store, actions } = useContext(Context);
-
   return (
-    <div
-      className="centralcontent text-center mt-5 w-50 "
-      style={{ backgroundImage: `url(${fondo})` }}
-    >
-      {/* <div className="alert alert-info">
-        {" "}
-        {store.message ||
-          "Loading message from the backend (make sure your python backend is running)..."}{" "}
-      </div> */}
+    <div className="container-lg">
+      <div className="fw-bold text-center fs-2 mt-3 mb-0">DATOS USUARIO</div>
+      <div className="row g-3 mt-0 mb-4">
+        <div className="col">
+          <span className="input-group-text fs-5">NOMBRE</span>
+        </div>
+        <div className="col">
+          <input type="text" className="form-control" />
+        </div>
+      </div>
+      <div className="row g-4 my-4">
+        <div className="col">
+          <span className="input-group-text fs-5">APELLIDOS</span>
+        </div>
+        <div className="col">
+          <input type="text" className="form-control" />
+        </div>
+      </div>
+      <div className="row g-4 my-4">
+        <div className="col">
+          <span className="input-group-text fs-5">CORREO ELECTÓNICO</span>
+        </div>
+        <div className="col">
+          <input type="text" className="form-control" />
+        </div>
+      </div>
+      <div className="row g-4 my-4">
+        <div className="col">
+          <span class="input-group-text fs-5">CONTRASEÑA</span>
+        </div>
+        <div className="col">
+          <input type="text" className="form-control" />
+        </div>
+      </div>
+      <div className="d-grid gap-2 col-5 mx-auto my-3">
+        <button className="btn btn-success  fw-bold" type="button">
+          GUARDAR
+        </button>
+      </div>
+      <div className=" d-flex justify-content-center">
+        <button className="col-2 btn btn-success me-md-2 fw-bold" type="button">
+          EDITAR
+        </button>
+        <button className="col-2 btn btn-success fw-bold" type="button">
+          BAJA
+        </button>
+      </div>
     </div>
   );
 };
