@@ -51,7 +51,7 @@ export const Acceso = () => {
           <button className="btn btn-danger m-1" onClick={handleLogout}>
             Cerrar Sesion{" "}
           </button>{" "}
-          {navigate("/demo")};{" "}
+          {/* {navigate("/demo")};{" "} */}{" "}
         </div>
       ) : (
         <div className=" m-auto text-center">
