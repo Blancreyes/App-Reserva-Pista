@@ -21,7 +21,7 @@ export const Navbar = () => {
         </Link>
       </div>
 
-      <div className="flags w-25 mt-1 me-3 text-end ">
+      <div className="flags w-25 mt-3 me-3 text-end ">
         <Link className="flag1 me-1 align-items-end " to={"./"}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

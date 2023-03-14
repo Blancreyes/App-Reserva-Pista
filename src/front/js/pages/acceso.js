@@ -23,9 +23,8 @@ export const Acceso = () => {
     // Esta funcion es para  agregar la lógica de iniciar sesión en la base de datos con el email y la contraseña
     // Si la autenticación es correcta, hay que poner setLoggedIn a true y a setUserName a el nombre del usuario registrado en la base de datos´
     setLoggedIn(await actions.loginUsuario(email, password));
-    if (loggedIn) {
-      navigate("/demo");
-    }
+    // if (loggedIn) {
+    // }
   }
 
   function handleAlta() {
@@ -42,16 +41,17 @@ export const Acceso = () => {
   return (
     <div className="m-auto">
       <div className=" m-auto text-center">
-        <h1>Acceso</h1>
-      </div>
+        <h1> Acceso </h1>{" "}
+      </div>{" "}
       {loggedIn ? (
         <div className=" m-auto text-center">
           <p>
-            <strong>Bienvenido, {userName}</strong>
-          </p>
+            <strong> Bienvenido, {userName} </strong>{" "}
+          </p>{" "}
           <button className="btn btn-danger m-1" onClick={handleLogout}>
-            Cerrar Sesion
-          </button>
+            Cerrar Sesion{" "}
+          </button>{" "}
+          {navigate("/demo")};{" "}
         </div>
       ) : (
         <div className=" m-auto text-center">
@@ -61,18 +61,18 @@ export const Acceso = () => {
             placeholder="Email"
             value={email}
             onChange={handleEmailChange}
-          />
+          />{" "}
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={handlePasswordChange}
-          />
+          />{" "}
           <button className="btn btn-warning m-1" onClick={handleLogin}>
-            <strong>Enviar</strong>
-          </button>
+            <strong> Enviar </strong>{" "}
+          </button>{" "}
         </div>
-      )}
+      )}{" "}
     </div>
   );
 };
