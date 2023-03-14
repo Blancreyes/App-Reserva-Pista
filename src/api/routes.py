@@ -103,3 +103,68 @@ def handle_create_reservas():
     
     else:
         return jsonify("Esta reserva ya existe"), 400
+    
+#Consultar un reserva
+@api.route('/reservas', methods=['GET'])
+def handle_consult_reservas():
+    #se debe pasar la información a formato json
+    request_body=request.json
+    
+    #se verifica si la reserva ya existe
+    reservas_info_query=Reservas.query.filter_by(user_id=request_body["user_id"]).all()
+    result=list(map(lambda item: item.serialize(), reservas_info_query))
+    print(result)
+    
+    # startTime=request_body["startTime"], 
+    
+    #Si la reserva no existe, entonces se crea reserva
+    # if reservas_info_query is None:
+    #     reservas=Reservas(
+    #         user_id=request_body["user_id"],
+    #         pistas_id=request_body["pistas_id"],
+    #         startTime=request_body["startTime"]
+    #     )
+        
+    #     db.session.add(reservas)
+    #     db.session.commit()
+    response_body = {
+        "msg": "Reserva existe",
+        "result": result
+        
+    }
+    return jsonify(response_body), 200
+    
+@api.route('/reservas', methods=['PUT'])
+def handle_update_reservas():
+    #se debe pasar la información a formato json
+    request_body=request.json
+    
+    #se verifica si la reserva ya existe
+    reservas_info_query=Reservas.query.filter_by(user_id=request_body["user_id"], id=request_body["id"]).first()
+    # result=list(map(lambda item: item.serialize(), reservas_info_query))
+ 
+    
+    reservas_info_query.startTime=request_body["startTime"]
+    
+    db.session.add(reservas_info_query)
+    db.session.commit()
+    
+    # startTime=request_body["startTime"], 
+    
+    #Si la reserva no existe, entonces se crea reserva
+    # if reservas_info_query is None:
+    #     reservas=Reservas(
+    #         user_id=request_body["user_id"],
+    #         pistas_id=request_body["pistas_id"],
+    #         startTime=request_body["startTime"]
+    #     )
+        
+    #     db.session.add(reservas)
+    #     db.session.commit()
+    response_body = {
+        "msg": "Reserva existe",
+        # "result": result
+        
+    }
+    return jsonify(response_body), 200
+  
