@@ -22,9 +22,11 @@ export const Acceso = () => {
   async function handleLogin() {
     // Esta funcion es para  agregar la lógica de iniciar sesión en la base de datos con el email y la contraseña
     // Si la autenticación es correcta, hay que poner setLoggedIn a true y a setUserName a el nombre del usuario registrado en la base de datos´
-    setLoggedIn(await actions.loginUsuario(email, password));
-    // if (loggedIn) {
-    // }
+    // setLoggedIn(await actions.loginUsuario(email, password));
+    let loggedIni = await actions.loginUsuario(email, password);
+    if (loggedIni) {
+      navigate("/demo");
+    }
   }
 
   function handleAlta() {
@@ -43,36 +45,24 @@ export const Acceso = () => {
       <div className=" m-auto text-center">
         <h1> Acceso </h1>{" "}
       </div>{" "}
-      {loggedIn ? (
-        <div className=" m-auto text-center">
-          <p>
-            <strong> Bienvenido, {userName} </strong>{" "}
-          </p>{" "}
-          <button className="btn btn-danger m-1" onClick={handleLogout}>
-            Cerrar Sesion{" "}
-          </button>{" "}
-          {/* {navigate("/demo")};{" "} */}{" "}
-        </div>
-      ) : (
-        <div className=" m-auto text-center">
-          {" "}
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={handleEmailChange}
-          />{" "}
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={handlePasswordChange}
-          />{" "}
-          <button className="btn btn-warning m-1" onClick={handleLogin}>
-            <strong> Enviar </strong>{" "}
-          </button>{" "}
-        </div>
-      )}{" "}
+      <div className=" m-auto text-center">
+        {" "}
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={handleEmailChange}
+        />{" "}
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={handlePasswordChange}
+        />{" "}
+        <button className="btn btn-warning m-1" onClick={handleLogin}>
+          <strong> Enviar </strong>{" "}
+        </button>{" "}
+      </div>
     </div>
   );
 };
