@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/component.css";
 import logo from "../store/resources/logooval.png";
-import { Acceder } from "./acceder.jsx";
 
 export const Navbar = () => {
   return (
@@ -13,8 +12,13 @@ export const Navbar = () => {
         </Link>
       </div>
 
-      <div className="registro ml-5 w-75 text-end">
-        <Acceder />
+      <div className="botones mt-3 ml-5 w-75 text-end">
+        <Link to="/acceso" className="btn btn-warning m-1">
+          <strong>Acceder</strong>
+        </Link>
+        <Link to="/" className="btn btn-warning m-1">
+          <strong>Registrarse</strong>
+        </Link>
       </div>
 
       <div className="flags w-25 mt-1 me-3 text-end ">

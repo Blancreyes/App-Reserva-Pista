@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 
-export const Acceder = () => {
+export const Acceso = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
@@ -24,7 +24,7 @@ export const Acceder = () => {
     // Si la autenticación es correcta, hay que poner setLoggedIn a true y a setUserName a el nombre del usuario registrado en la base de datos´
     setLoggedIn(await actions.loginUsuario(email, password));
     if (loggedIn) {
-      navigate("../pages/demo.js");
+      navigate("/demo");
     }
   }
 
@@ -40,12 +40,12 @@ export const Acceder = () => {
   }
 
   return (
-    <div className="">
-      <div className="text-center">
+    <div className="m-auto">
+      <div className=" m-auto text-center">
         <h1>Acceso</h1>
       </div>
       {loggedIn ? (
-        <div>
+        <div className=" m-auto text-center">
           <p>
             <strong>Bienvenido, {userName}</strong>
           </p>
@@ -54,7 +54,7 @@ export const Acceder = () => {
           </button>
         </div>
       ) : (
-        <div>
+        <div className=" m-auto text-center">
           {" "}
           <input
             type="email"
@@ -69,10 +69,7 @@ export const Acceder = () => {
             onChange={handlePasswordChange}
           />
           <button className="btn btn-warning m-1" onClick={handleLogin}>
-            <strong>Acceder</strong>
-          </button>
-          <button className="btn btn-warning m-1" onClick={handleAlta}>
-            <strong>Registrarse</strong>
+            <strong>Enviar</strong>
           </button>
         </div>
       )}
