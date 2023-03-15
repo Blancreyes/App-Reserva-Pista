@@ -1,4 +1,5 @@
 import axios from "axios";
+
 const getState = ({
     getStore,
     getActions,
@@ -55,20 +56,29 @@ const getState = ({
                     demo: demo,
                 });
             },
-            altaUsuario: async (name, lastname, email, password) => {
+            // funcion que usa el ENDPOINT login para pasar los datos y acceder a la base de datos
+            loginUsuario: async (email, password) => {
                 try {
                     let response = await axios.post(
-                        "https://3001-blancreyes-appreservame-ulk3mey3r43.ws-eu90.gitpod.io/api/user", {
-                            name: name,
-                            lastname: lastname,
+                        "https://3001-blancreyes-appreservame-k7jyqgv0eip.ws-eu90.gitpod.io/api/login", {
                             email: email,
                             password: password,
                         }
                     );
+                    console.log(response);
+                    localStorage.setItem("token", response.data.access_token);
                     return true;
                 } catch (error) {
                     console.log(error);
+                    if (error.response.status >= 400) {
+                        alert(error.response.data.msg);
+                    }
+                    return false;
                 }
+            },
+            handleLogout: () => {
+                //Aquí habría que colocar la lógica para cerrar la sesión del usuario y  colocar setLoggedIn a false
+                localStorage.removeItem("token");
             },
         },
     };

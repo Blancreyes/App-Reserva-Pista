@@ -23,7 +23,7 @@ class User(db.Model):
             "name":self.name,
             "lastname":self.lastname,
             "email": self.email,
-            "reservas":self.reservas,
+            "reservas":list(map(lambda item: item.serialize(),self.reservas)),
             # do not serialize the password, its a security breach
         }
 
