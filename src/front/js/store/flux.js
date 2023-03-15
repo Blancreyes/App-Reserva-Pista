@@ -80,6 +80,21 @@ const getState = ({
                 //Aquí habría que colocar la lógica para cerrar la sesión del usuario y  colocar setLoggedIn a false
                 localStorage.removeItem("token");
             },
+            altaUsuario: async (name, lastname, email, password) => {
+                try {
+                    let response = await axios.post(
+                        "https://3001-blancreyes-appreservame-ulk3mey3r43.ws-eu90.gitpod.io/api/user", {
+                            name: name,
+                            lastname: lastname,
+                            email: email,
+                            password: password,
+                        }
+                    );
+                    return true;
+                } catch (error) {
+                    console.log(error);
+                }
+            },
         },
     };
 };
