@@ -60,7 +60,7 @@ const getState = ({
             loginUsuario: async (email, password) => {
                 try {
                     let response = await axios.post(
-                        "https://3001-blancreyes-appreservame-k7jyqgv0eip.ws-eu90.gitpod.io/api/login", {
+                        "https://3001-blancreyes-appreservame-bdvf39m2mtc.ws-eu90.gitpod.io/api/login", {
                             email: email,
                             password: password,
                         }
@@ -83,7 +83,7 @@ const getState = ({
             altaUsuario: async (name, lastname, email, password) => {
                 try {
                     let response = await axios.post(
-                        "https://3001-blancreyes-appreservame-ulk3mey3r43.ws-eu90.gitpod.io/api/user", {
+                        "https://3001-blancreyes-appreservame-bdvf39m2mtc.ws-eu90.gitpod.io/api/user", {
                             name: name,
                             lastname: lastname,
                             email: email,
