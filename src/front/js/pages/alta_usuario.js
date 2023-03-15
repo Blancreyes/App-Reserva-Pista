@@ -91,7 +91,7 @@ export const Alta_usuario = () => {
       </div>
       <div className="row g-4 my-4">
         <div className="col">
-          <span class="input-group-text fs-5">CONTRASEÑA</span>
+          <span className="input-group-text fs-5">CONTRASEÑA</span>
         </div>
         <div className="col">
           <input
