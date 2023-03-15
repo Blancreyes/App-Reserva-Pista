@@ -60,12 +60,13 @@ const getState = ({
             loginUsuario: async (email, password) => {
                 try {
                     let response = await axios.post(
-                        "https://3001-blancreyes-appreservame-gs2rh9bdhx3.ws-eu90.gitpod.io/api/login", {
+                        "https://3001-blancreyes-appreservame-k7jyqgv0eip.ws-eu90.gitpod.io/api/login", {
                             email: email,
                             password: password,
                         }
                     );
                     console.log(response);
+                    localStorage.setItem("token", response.data.access_token);
                     return true;
                 } catch (error) {
                     console.log(error);
@@ -74,8 +75,10 @@ const getState = ({
                     }
                     return false;
                 }
-
-                console.log(response);
+            },
+            handleLogout: () => {
+                //Aquí habría que colocar la lógica para cerrar la sesión del usuario y  colocar setLoggedIn a false
+                localStorage.removeItem("token");
             },
         },
     };

@@ -18,13 +18,12 @@ export const Acceso = () => {
   function handlePasswordChange(event) {
     setPassword(event.target.value);
   }
-
   async function handleLogin() {
-    // Esta funcion es para  agregar la lógica de iniciar sesión en la base de datos con el email y la contraseña
-    // Si la autenticación es correcta, hay que poner setLoggedIn a true y a setUserName a el nombre del usuario registrado en la base de datos´
-    // setLoggedIn(await actions.loginUsuario(email, password));
+    // Esta funcion es para  agregar la lógica de iniciar sesión en la base de datos con el email y la contraseña en caso que sea correcta te lleva a la pagina /demo
     let loggedIni = await actions.loginUsuario(email, password);
     if (loggedIni) {
+      setEmail("");
+      setPassword("");
       navigate("/demo");
     }
   }
@@ -32,14 +31,6 @@ export const Acceso = () => {
   function handleAlta() {
     //Aquí habría que añadir la  lógica para registrar un nuevo usuario en la base de datos con el email y la contraseña
   }
-
-  function handleLogout() {
-    //Aquí habría que colocar la lógica para cerrar la sesión del usuario y  colocar setLoggedIn a false
-    setEmail("");
-    setPassword("");
-    setLoggedIn(false);
-  }
-
   return (
     <div className="m-auto">
       <div className=" m-auto text-center">
@@ -62,6 +53,12 @@ export const Acceso = () => {
         <button className="btn btn-warning m-1" onClick={handleLogin}>
           <strong> Enviar </strong>{" "}
         </button>{" "}
+      </div>
+      <div className="m-auto text-center">
+        ¿Olvidó su contraseña? Haga click{" "}
+        <a className="" href="/">
+          <strong>aquí</strong>
+        </a>
       </div>
     </div>
   );
