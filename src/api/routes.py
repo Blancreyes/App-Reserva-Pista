@@ -32,6 +32,8 @@ def handle_create_user():
     #Si el usuario no existe, entonces se crea usuario
     if user_info_query is None:
         user=User(
+            name=request_body["name"],
+            lastname=request_body["lastname"],
             email=request_body["email"],
             password=request_body["password"]
         )
