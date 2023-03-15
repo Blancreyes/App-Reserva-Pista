@@ -5,11 +5,31 @@ import { useNavigate } from "react-router-dom";
 
 export const Alta_usuario = () => {
   const { store, actions } = useContext(Context);
-  const { email, setEmail } = useState();
-  const { password, setPassword } = useState();
-  const { name, setName } = useState();
-  const { lastname, setLastname } = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
   const navigate = useNavigate();
+
+  const hadleName = (e) => {
+    e.preventDefault();
+    setName(e.target.value);
+  };
+
+  const hadleLastname = (e) => {
+    e.preventDefault();
+    setLastname(e.target.value);
+  };
+
+  const hadleEmail = (e) => {
+    e.preventDefault();
+    setEmail(e.target.value);
+  };
+
+  const hadlePassword = (e) => {
+    e.preventDefault();
+    setPassword(e.target.value);
+  };
 
   async function handleAltaUsuario(e) {
     e.preventDefault();
@@ -37,7 +57,7 @@ export const Alta_usuario = () => {
             className="form-control"
             id="nombre"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={hadleName}
           />
         </div>
       </div>
@@ -51,13 +71,13 @@ export const Alta_usuario = () => {
             className="form-control"
             id="apellidos"
             value={lastname}
-            onChange={(e) => setLastname(e.target.value)}
+            onChange={hadleLastname}
           />
         </div>
       </div>
       <div className="row g-4 my-4">
         <div className="col">
-          <span className="input-group-text fs-5">CORREO ELECTÓNICO</span>
+          <span className="input-group-text fs-5">CORREO ELECTRÓNICO</span>
         </div>
         <div className="col">
           <input
@@ -65,7 +85,7 @@ export const Alta_usuario = () => {
             className="form-control"
             id="correo"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={hadleEmail}
           />
         </div>
       </div>
@@ -79,7 +99,7 @@ export const Alta_usuario = () => {
             className="form-control"
             id="contraseña"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={hadlePassword}
           />
         </div>
       </div>

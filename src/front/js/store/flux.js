@@ -58,7 +58,7 @@ const getState = ({
             altaUsuario: async (name, lastname, email, password) => {
                 try {
                     let response = await axios.post(
-                        "https://3000-blancreyes-appreservame-0d52zrgjgnr.ws-eu90.gitpod.io/alta_usuario", {
+                        "https://3001-blancreyes-appreservame-ulk3mey3r43.ws-eu90.gitpod.io/api/user", {
                             name: name,
                             lastname: lastname,
                             email: email,
