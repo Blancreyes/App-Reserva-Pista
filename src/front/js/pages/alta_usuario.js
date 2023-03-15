@@ -46,7 +46,13 @@ export const Alta_usuario = () => {
           <span className="input-group-text fs-5">APELLIDOS</span>
         </div>
         <div className="col">
-          <input type="text" className="form-control" />
+          <input
+            type="text"
+            className="form-control"
+            id="apellidos"
+            value={lastname}
+            onChange={(e) => setLastname(e.target.value)}
+          />
         </div>
       </div>
       <div className="row g-4 my-4">
@@ -54,7 +60,13 @@ export const Alta_usuario = () => {
           <span className="input-group-text fs-5">CORREO ELECTÓNICO</span>
         </div>
         <div className="col">
-          <input type="text" className="form-control" />
+          <input
+            type="text"
+            className="form-control"
+            id="correo"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
       </div>
       <div className="row g-4 my-4">
@@ -62,7 +74,13 @@ export const Alta_usuario = () => {
           <span class="input-group-text fs-5">CONTRASEÑA</span>
         </div>
         <div className="col">
-          <input type="text" className="form-control" />
+          <input
+            type="text"
+            className="form-control"
+            id="contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
       </div>
       <div className="d-grid gap-2 col-5 mx-auto my-3">
