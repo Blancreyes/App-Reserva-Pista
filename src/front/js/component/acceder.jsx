@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 export const Acceder = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
-  const [userName, setUserName] = useState("");
+  // const [userName, setUserName] = useState("");
+  const { store, actions } = useContext(Context);
+  var userName = email;
+  const navigate = useNavigate();
 
   function handleEmailChange(event) {
     setEmail(event.target.value);
@@ -14,12 +19,16 @@ export const Acceder = () => {
     setPassword(event.target.value);
   }
 
-  function handleSignIn() {
-    //Esta funcion es para  agregar la lógica de iniciar sesión en la base de datos con el email y la contraseña
-    //Si la autenticación es correcta, hay que poner setLoggedIn a true y a setUserName a el nombre del usuario registrado en la base de datos
+  async function handleLogin() {
+    // Esta funcion es para  agregar la lógica de iniciar sesión en la base de datos con el email y la contraseña
+    // Si la autenticación es correcta, hay que poner setLoggedIn a true y a setUserName a el nombre del usuario registrado en la base de datos´
+    setLoggedIn(await actions.loginUsuario(email, password));
+    if (loggedIn) {
+      navigate("../pages/demo.js");
+    }
   }
 
-  function handleSignUp() {
+  function handleAlta() {
     //Aquí habría que añadir la  lógica para registrar un nuevo usuario en la base de datos con el email y la contraseña
   }
 
@@ -27,7 +36,7 @@ export const Acceder = () => {
     //Aquí habría que colocar la lógica para cerrar la sesión del usuario y  colocar setLoggedIn a false
     setEmail("");
     setPassword("");
-    setUserName("");
+    setLoggedIn(false);
   }
 
   return (
@@ -37,8 +46,12 @@ export const Acceder = () => {
       </div>
       {loggedIn ? (
         <div>
-          <p>Welcome, {userName}</p>
-          <button onClick={handleLogout}>Log out</button>
+          <p>
+            <strong>Bienvenido, {userName}</strong>
+          </p>
+          <button className="btn btn-danger m-1" onClick={handleLogout}>
+            Cerrar Sesion
+          </button>
         </div>
       ) : (
         <div>
@@ -55,10 +68,10 @@ export const Acceder = () => {
             value={password}
             onChange={handlePasswordChange}
           />
-          <button className="btn btn-warning m-1" onClick={handleSignIn}>
+          <button className="btn btn-warning m-1" onClick={handleLogin}>
             <strong>Acceder</strong>
           </button>
-          <button className="btn btn-warning m-1" onClick={handleSignUp}>
+          <button className="btn btn-warning m-1" onClick={handleAlta}>
             <strong>Registrarse</strong>
           </button>
         </div>

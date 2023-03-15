@@ -10,7 +10,6 @@ from flask_jwt_extended import jwt_required
 
 api = Blueprint('api', __name__)
 
-
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
 
