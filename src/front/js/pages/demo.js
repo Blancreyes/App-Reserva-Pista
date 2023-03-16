@@ -34,7 +34,7 @@ export const Demo = () => {
                   // Check to see if the background is orange, if so, display the message
                   item.background === "orange" ? (
                     <p style={{ color: item.initial }}>
-                      Check store/flux.js scroll to the actions to see the code
+                      Me encanta la tonteria esta de cambiar el color.
                     </p>
                   ) : null
                 }
