@@ -7,14 +7,25 @@ const getState = ({
 }) => {
     return {
         store: {
+            url: "https://3001-blancreyes-appreservame-zor00c4q1tq.ws-eu90.gitpod.io",
             message: null,
             demo: [{
-                    title: "FIRST",
+                    title: "Piscina",
                     background: "white",
                     initial: "white",
                 },
                 {
-                    title: "SECOND",
+                    title: "Pista Paddle",
+                    background: "white",
+                    initial: "white",
+                },
+                {
+                    title: "Pista Tenis",
+                    background: "white",
+                    initial: "white",
+                },
+                {
+                    title: "Campo de Futbol",
                     background: "white",
                     initial: "white",
                 },
@@ -59,12 +70,13 @@ const getState = ({
             // funcion que usa el ENDPOINT login para pasar los datos y acceder a la base de datos
             loginUsuario: async (email, password) => {
                 try {
-                    let response = await axios.post(
-                        "https://3001-blancreyes-appreservame-bdvf39m2mtc.ws-eu90.gitpod.io/api/login", {
-                            email: email,
-                            password: password,
-                        }
-                    );
+                    const store = getStore();
+                    const urlserver = store.url;
+                    console.log(urlserver);
+                    let response = await axios.post(urlserver + "/api/login", {
+                        email: email,
+                        password: password,
+                    });
                     console.log(response);
                     localStorage.setItem("token", response.data.access_token);
                     return true;
@@ -82,14 +94,15 @@ const getState = ({
             },
             altaUsuario: async (name, lastname, email, password) => {
                 try {
-                    let response = await axios.post(
-                        "https://3001-blancreyes-appreservame-bdvf39m2mtc.ws-eu90.gitpod.io/api/user", {
-                            name: name,
-                            lastname: lastname,
-                            email: email,
-                            password: password,
-                        }
-                    );
+                    const store = getStore();
+                    const urlserver = store.url;
+                    console.log(urlserver);
+                    let response = await axios.post(urlserver + "/api/user", {
+                        name: name,
+                        lastname: lastname,
+                        email: email,
+                        password: password,
+                    });
                     return true;
                 } catch (error) {
                     console.log(error);
