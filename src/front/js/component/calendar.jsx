@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const WeeklySchedule = () => {
+export const Calendar = () => {
   const [events, setEvents] = useState([
     { title: "Meeting", start_time: "9:00am", end_time: "10:00am" },
     { title: "Lunch", start_time: "12:00pm", end_time: "1:00pm" },
@@ -8,13 +8,13 @@ const WeeklySchedule = () => {
   ]);
 
   const daysOfWeek = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
+    "Monday ",
+    "Tuesday ",
+    "Wednesday ",
+    "Thursday ",
+    "Friday ",
+    "Saturday ",
+    "Sunday ",
   ];
   const hoursOfDay = [
     "9:00am",
@@ -48,7 +48,11 @@ const WeeklySchedule = () => {
 
   const renderHeader = () => {
     const headerCells = daysOfWeek.map((day) => {
-      return <th key={day}>{day}</th>;
+      return (
+        <th key={day}>
+          <strong>{day}</strong>
+        </th>
+      );
     });
 
     return (
@@ -88,7 +92,7 @@ const WeeklySchedule = () => {
         });
 
         rowCells.push(
-          <td key={i}>
+          <td key={i} className="border border-success">
             {eventsForDay.map((event, index) => (
               <div key={index} className="event">
                 {event.title}
@@ -100,7 +104,7 @@ const WeeklySchedule = () => {
 
       return (
         <tr key={hour}>
-          <td>{hour}</td>
+          <td className="border border-success">{hour}</td>
           {rowCells}
         </tr>
       );
@@ -110,11 +114,11 @@ const WeeklySchedule = () => {
   };
 
   return (
-    <table className="weekly-schedule">
-      {renderHeader()}
-      {renderRows()}
-    </table>
+    <>
+      <table className="weekly-schedule border border-success">
+        {renderHeader()}
+        {renderRows()}
+      </table>
+    </>
   );
 };
-
-export default WeeklySchedule;

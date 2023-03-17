@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { Context } from "../store/appContext";
+import { Calendar } from "../component/calendar.jsx";
 
 export const Demo = () => {
   const { store, actions } = useContext(Context);
@@ -65,6 +66,7 @@ export const Demo = () => {
           </button>
         </Link>
       </div>
+      <Calendar />
     </div>
   );
 };
