@@ -8,13 +8,13 @@ export const Calendar = () => {
   ]);
 
   const daysOfWeek = [
-    "Monday ",
-    "Tuesday ",
-    "Wednesday ",
-    "Thursday ",
-    "Friday ",
-    "Saturday ",
-    "Sunday ",
+    "Lunes ",
+    "Martes ",
+    "Miercoles ",
+    "Jueves ",
+    "Viernes ",
+    "Sabado ",
+    "Domingo ",
   ];
   const hoursOfDay = [
     "9:00am",
@@ -30,8 +30,6 @@ export const Calendar = () => {
     "7:00pm",
     "8:00pm",
     "9:00pm",
-    "10:00pm",
-    "11:00pm",
   ];
 
   const currentWeek = new Date();
@@ -49,7 +47,7 @@ export const Calendar = () => {
   const renderHeader = () => {
     const headerCells = daysOfWeek.map((day) => {
       return (
-        <th key={day}>
+        <th className="border border-success " key={day}>
           <strong>{day}</strong>
         </th>
       );
@@ -114,11 +112,14 @@ export const Calendar = () => {
   };
 
   return (
-    <>
-      <table className="weekly-schedule border border-success">
+    <div>
+      <h2>
+        Semana: {startOfWeek.toDateString()}, {endOfWeek.toDateString()}
+      </h2>
+      <table className="table table-success border border-success m-auto w-75">
         {renderHeader()}
         {renderRows()}
       </table>
-    </>
+    </div>
   );
 };

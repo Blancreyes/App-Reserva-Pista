@@ -2,27 +2,38 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
+import { Calendar } from "../component/calendar.jsx";
 
-export const Single = props => {
-	const { store, actions } = useContext(Context);
-	const params = useParams();
+export const Single = (props) => {
+  const { store, actions } = useContext(Context);
+  const params = useParams();
 
-	return (
-		<div className="jumbotron">
-			<h1 className="display-4">This will show the demo element: {store.demo[params.theid].title}</h1>
-			<img src={rigoImageUrl} />
-			<hr className="my-4" />
+  return (
+    <div className="jumbotron m-auto">
+      <div className="tituloinstalacion m-auto">
+        <h3 className="  text-center mt-1">
+          Este es el calendario de la instalacion:{" "}
+          {store.demo[params.theid].title}
+        </h3>
+      </div>
+      <div className="calendarioinstalacion mt-4 text-center">
+        <Calendar />
+      </div>
+      <hr className="my-4" />
 
-			<Link to="/">
-				<span className="btn btn-primary btn-lg" href="#" role="button">
-					Back home
-				</span>
-			</Link>
-		</div>
-	);
+      <Link className="text-end" to="/demo">
+        <span
+          className="btn btn-warning btn-lg text-end"
+          href="#"
+          role="button"
+        >
+          <strong>Volver Atrás</strong>
+        </span>
+      </Link>
+    </div>
+  );
 };
 
 Single.propTypes = {
-	match: PropTypes.object
+  match: PropTypes.object,
 };

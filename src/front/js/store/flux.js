@@ -7,7 +7,7 @@ const getState = ({
 }) => {
     return {
         store: {
-            url: "https://3001-blancreyes-appreservame-zor00c4q1tq.ws-eu90.gitpod.io",
+            url: "https://3001-blancreyes-appreservame-j6wzkf3jxtw.ws-eu90.gitpod.io",
             message: null,
             demo: [{
                     title: "Piscina",
@@ -90,6 +90,8 @@ const getState = ({
             },
             handleLogout: () => {
                 //Aquí habría que colocar la lógica para cerrar la sesión del usuario y  colocar setLoggedIn a false
+                // localStorage.removeItem("token");
+                console.log("Aqui funciona");
                 localStorage.removeItem("token");
             },
             altaUsuario: async (name, lastname, email, password) => {
