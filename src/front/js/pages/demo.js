@@ -5,8 +5,13 @@ import { Context } from "../store/appContext";
 
 export const Demo = () => {
   const { store, actions } = useContext(Context);
+  let loggedIn = false;
+  // El useEffect no funciona aun bien
+  useEffect(async () => {
+    loggedIn = await actions.compruebaUsuario();
+  }, []);
 
-  return (
+  return loggedIn ? (
     <div className="container">
       <div className="title">
         <h1 className="title"> ZONA PRIVADA </h1>{" "}
@@ -35,25 +40,6 @@ export const Demo = () => {
                     <strong> {item.title} </strong>
                   </span>
                 </Link>
-                {/* {
-                  // Conditional render example
-                  // Check to see if the background is orange, if so, display the message
-                  item.background === "orange" ? (
-                    <p
-                      style={{
-                        color: item.initial,
-                      }}
-                    >
-                      Me encanta la tonteria esta de cambiar el color.{" "}
-                    </p>
-                  ) : null
-                }{" "}
-                <button
-                  className="btn btn-success"
-                  onClick={() => actions.changeColor(index, "orange")}
-                >
-                  Change Color{" "}
-                </button>{" "} */}
               </li>
             );
           })}
@@ -75,6 +61,12 @@ export const Demo = () => {
           </button>{" "}
         </Link>{" "}
       </div>
+    </div>
+  ) : (
+    <div className="display-5 text-center h-75">
+      <strong>
+        Para visitar esta zona es necesario acceder como usuario registrado
+      </strong>
     </div>
   );
 };

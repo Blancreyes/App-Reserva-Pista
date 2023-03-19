@@ -72,7 +72,6 @@ def login():
 @api.route("/profile", methods=["GET"])
 @jwt_required()
 def get_profile():
-    
     # Access the identity of the current user with get_jwt_identity
     current_user = get_jwt_identity()
     user = User.query.filter_by(email=current_user).first()
@@ -83,7 +82,6 @@ def get_profile():
 def handle_create_reservas():
     #se debe pasar la información a formato json
     request_body=request.json
-    
     #se verifica si la reserva ya existe
     reservas_info_query=Reservas.query.filter_by(startTime=request_body["startTime"], user_id=request_body["user_id"]).first()
     
