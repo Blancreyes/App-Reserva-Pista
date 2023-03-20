@@ -16,11 +16,14 @@ export const Password = () => {
 
   async function handleRecuperarPassword(e) {
     e.preventDefault();
-    setEmail("");
-    alert(
-      "Se ha enviado un correo electrónico con las instrucciones para modificar la contraseña"
-    );
-    navigate("/restablecer_password");
+    let recover = actions.recover_password(email);
+    if (recover) {
+      setEmail("");
+      alert(
+        "Se ha enviado un correo electrónico con las instrucciones para modificar la contraseña"
+      );
+      navigate("/restablecer_password");
+    }
   }
 
   return (
