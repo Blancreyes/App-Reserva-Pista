@@ -10,20 +10,21 @@ export const Password = () => {
   const [errorEmail, setErrorEmail] = useState(null);
 
   const handleEmail = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     setEmail(e.target.value);
   };
 
-  async function handleRecuperarPassword(e) {
-    e.preventDefault();
-    let recover = actions.recover_password(email);
-    if (recover) {
-      setEmail("");
-      alert(
-        "Se ha enviado un correo electrónico con las instrucciones para modificar la contraseña"
-      );
-      navigate("/restablecer_password");
-    }
+  function handleRecuperarPassword(e) {
+    console.log("funciona");
+    //e.preventDefault();
+    //let recover = actions.recover_password(email);
+    // if (recover) {
+    //   setEmail("");
+    //   alert(
+    //     "Se ha enviado un correo electrónico con las instrucciones para modificar la contraseña"
+    //   );
+    //   navigate("/restablecer_password");
+    //}
   }
 
   return (
@@ -53,9 +54,6 @@ export const Password = () => {
             className="btn btn-success  fw-bold"
             type="button"
             onClick={handleRecuperarPassword}
-            defaultValue={email}
-            errorMessage={errorEmail}
-            keyboardType="email-address"
           >
             OBTENER ENLACE
           </button>
