@@ -1,7 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-from flask import Flask, request, jsonify, url_for, Blueprint
+from flask import Flask, request, jsonify, url_for, Blueprint,send_email,redirect,render_template,flash
 from api.models import db, User, Reservas
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
@@ -66,6 +66,31 @@ def login():
 
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
+
+@api.route('/password', methods=[("GET","POST")])
+def reset_request():
+     email = request.json.get("email", None)
+     user= User.query.filter_by(email=email).first()
+     
+     if user:
+             send_email(user)
+             flash("Le hemos enviado un correo para modificar su contraseña.")
+             return redirect(url_for("restablecer_password"))
+     return render_template("restablecer_password.html",title="Reset Request" , form=form, legend="Reset Request")
+ 
+def get_token(self,expires_sec=300) :
+         access_token = create_access_token(identity=email)
+         return jsonify(access_token=access_token,expires_in=expires_sec)
+    
+@staticmethod()
+def verify_token(token) :
+         serial=serializer(app.config["SECRET_KEY"])
+         serial.loads(token)["user_id"]
+         try:
+             user_id = serial.loads(token)["user_id"]
+         except:
+             return None
+         return User.query.filter_by(user_id=id).first()
 
 # Protect a route with jwt_required, which will kick out requests
 # without a valid JWT present.

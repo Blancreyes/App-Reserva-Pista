@@ -6,6 +6,8 @@ import { Inicio } from "./pages/inicio";
 import { Demo } from "./pages/demo";
 import { Alta_usuario } from "./pages/alta_usuario";
 import { Single } from "./pages/single";
+import { Password } from "./pages/password";
+import { Restablecer_password } from "./pages/restablecer_password";
 import { Acceso } from "./pages/acceso";
 import injectContext from "./store/appContext";
 
@@ -28,6 +30,11 @@ const Layout = () => {
             <Route element={<Acceso />} path="/acceso" />
             <Route element={<Demo />} path="/demo" />
             <Route element={<Alta_usuario />} path="/alta_usuario" />
+            <Route element={<Password />} path="/password" />
+            <Route
+              element={<Restablecer_password />}
+              path="/restablecer_password"
+            />
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<h1> Not found! </h1>} />
           </Routes>

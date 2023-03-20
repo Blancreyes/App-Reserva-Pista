@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 db = SQLAlchemy()
 
 class User(db.Model):
@@ -12,8 +12,6 @@ class User(db.Model):
     # is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     reservas = db.relationship('Reservas', backref='user', lazy=True)
     
-
-
     def __repr__(self):
         return f'<User {self.email}>'
 
