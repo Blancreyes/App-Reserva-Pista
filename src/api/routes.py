@@ -74,8 +74,9 @@ def login():
 def get_profile():
     # Access the identity of the current user with get_jwt_identity
     current_user = get_jwt_identity()
-    user = User.query.filter_by(email=current_user).first()
-    return jsonify({"result":user.serialize()}), 200
+    # user = User.query.filter_by(email=current_user).first()
+    # return jsonify({"result":user.serialize()}), 200
+    return jsonify(logged_in_as = current_user), 200
 
 #Endpoint para crear las reservas
 @api.route('/reservas', methods=['POST'])

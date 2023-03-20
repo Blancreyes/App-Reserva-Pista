@@ -3,7 +3,7 @@ import axios from "axios";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      url: "https://3001-blancreyes-appreservame-rg8j31furz7.ws-eu90.gitpod.io",
+      url: "https://3001-blancreyes-appreservame-82f950f1y5j.ws-eu90.gitpod.io",
       message: null,
       demo: [
         {
@@ -88,7 +88,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       handleLogout: () => {
         //Aquí habría que colocar la lógica para cerrar la sesión del usuario y  colocar setLoggedIn a false
         // localStorage.removeItem("token");
-        console.log("Aqui funciona");
         localStorage.removeItem("token");
       },
       altaUsuario: async (name, lastname, email, password) => {
@@ -111,9 +110,15 @@ const getState = ({ getStore, getActions, setStore }) => {
       compruebaUsuario: async () => {
         const store = getStore();
         const urlserver = store.url;
-        console.log(urlserver);
+
         try {
-          let response = await axios.get(urlserver + "/api/profile");
+          const mytoken = localStorage.getItem("token");
+          // console.log(mytoken);
+          let response = await axios.get(urlserver + "/api/profile", {
+            headers: {
+              Authorization: `Bearer ${mytoken}`,
+            },
+          });
           console.log("esta es la respuesta de compruebaUsuario:", response);
           return true;
         } catch (error) {

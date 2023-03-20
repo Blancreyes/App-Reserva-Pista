@@ -5,10 +5,16 @@ import { Context } from "../store/appContext";
 
 export const Demo = () => {
   const { store, actions } = useContext(Context);
-  let loggedIn = false;
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  async function checkLogin() {
+    // Esta funcion comprueba que se ha iniciado sesión en la base de datos previamente
+    // Si la autenticación es correcta, muestra contenido reservado a usuarios de la pagina
+    setLoggedIn(await actions.compruebaUsuario());
+  }
   // El useEffect no funciona aun bien
-  useEffect(async () => {
-    loggedIn = await actions.compruebaUsuario();
+  useEffect(() => {
+    checkLogin();
   }, []);
 
   return loggedIn ? (
@@ -37,14 +43,14 @@ export const Demo = () => {
                   }}
                 >
                   <span>
-                    <strong> {item.title} </strong>
-                  </span>
-                </Link>
+                    <strong> {item.title} </strong>{" "}
+                  </span>{" "}
+                </Link>{" "}
               </li>
             );
-          })}
-        </ul>
-      </div>
+          })}{" "}
+        </ul>{" "}
+      </div>{" "}
       <div className="misreservas d-flex">
         <h2 className="subtitle ms-2"> Mis Reservas </h2>{" "}
       </div>{" "}
@@ -60,13 +66,13 @@ export const Demo = () => {
             <strong> Cerrar sesion </strong>{" "}
           </button>{" "}
         </Link>{" "}
-      </div>
+      </div>{" "}
     </div>
   ) : (
     <div className="display-5 text-center h-75">
       <strong>
-        Para visitar esta zona es necesario acceder como usuario registrado
-      </strong>
+        Para visitar esta zona es necesario acceder como usuario registrado{" "}
+      </strong>{" "}
     </div>
   );
 };
