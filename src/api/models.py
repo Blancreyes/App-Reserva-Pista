@@ -1,5 +1,4 @@
 from flask_sqlalchemy import SQLAlchemy
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 db = SQLAlchemy()
 
 class User(db.Model):

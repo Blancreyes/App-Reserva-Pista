@@ -108,6 +108,25 @@ const getState = ({
                     console.log(error);
                 }
             },
+            recover_password: async (email) => {
+                try {
+                    const store = getStore();
+                    const urlserver = store.url;
+                    console.log(urlserver);
+                    let response = await axios.post(urlserver + "/api/password", {
+                        email: email,
+                    });
+                    console.log(response);
+                    localStorage.setItem("token", response.data.access_token);
+                    return true;
+                } catch (error) {
+                    console.log(error);
+                    if (error.response.status >= 400) {
+                        alert(error.response.data.msg);
+                    }
+                    return false;
+                }
+            },
         },
     };
 };
