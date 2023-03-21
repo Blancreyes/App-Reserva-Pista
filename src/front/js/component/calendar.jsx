@@ -10,7 +10,7 @@ export const Calendar = () => {
     "Domingo ",
   ];
   const hoursOfDay = [
-    "9:00",
+    "09:00",
     "10:00",
     "11:00",
     "12:00",
@@ -68,7 +68,7 @@ export const Calendar = () => {
       return (
         <tr key={hour}>
           <td className="border border-success">{hour}</td>
-          <td className="border border-success rounded-4">{dayswithhour}</td>
+          {dayswithhour}
         </tr>
       );
     });
@@ -82,7 +82,7 @@ export const Calendar = () => {
       </h2>
       {/* A la hora de pintar la tabla distinguimos primero pintando la cabecera y luego el resto de filas  */}
       <table className="table table-success border border-success m-auto w-75">
-        {/* {renderHeader()} */}
+        {renderHeader()}
         {renderRows()}
       </table>
     </div>

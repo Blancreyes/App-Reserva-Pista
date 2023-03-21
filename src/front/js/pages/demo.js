@@ -12,7 +12,7 @@ export const Demo = () => {
     // Si la autenticación es correcta, muestra contenido reservado a usuarios de la pagina
     setLoggedIn(await actions.compruebaUsuario());
   }
-  // El useEffect no funciona aun bien
+
   useEffect(() => {
     checkLogin();
   }, []);
