@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export const Acceso = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
+
   // const [userName, setUserName] = useState("");
   const { store, actions } = useContext(Context);
   var userName = email;
