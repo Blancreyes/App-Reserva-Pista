@@ -14,17 +14,17 @@ export const Password = () => {
     setEmail(e.target.value);
   };
 
-  function handleRecuperarPassword(e) {
-    console.log("funciona");
+  async function handleRecuperarPassword(e) {
+    // console.log("funciona");
     //e.preventDefault();
-    //let recover = actions.recover_password(email);
-    // if (recover) {
-    //   setEmail("");
-    //   alert(
-    //     "Se ha enviado un correo electrónico con las instrucciones para modificar la contraseña"
-    //   );
-    //   navigate("/restablecer_password");
-    //}
+    let recover = await actions.recover_password(email);
+    if (recover) {
+      setEmail("");
+      alert(
+        "Se ha enviado un correo electrónico con las instrucciones para modificar la contraseña"
+      );
+      navigate("/restablecer_password");
+    }
   }
 
   return (
