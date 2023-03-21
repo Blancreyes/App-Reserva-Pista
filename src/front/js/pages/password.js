@@ -7,23 +7,19 @@ export const Password = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [errorEmail, setErrorEmail] = useState(null);
 
   const handleEmail = (e) => {
-    //e.preventDefault();
     setEmail(e.target.value);
   };
 
   async function handleRecuperarPassword(e) {
-    // console.log("funciona");
-    //e.preventDefault();
     let recover = await actions.recover_password(email);
     if (recover) {
       setEmail("");
       alert(
         "Se ha enviado un correo electrónico con las instrucciones para modificar la contraseña"
       );
-      navigate("/restablecer_password");
+      navigate("/acceso");
     }
   }
 
