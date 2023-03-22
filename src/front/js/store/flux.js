@@ -156,7 +156,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               },
             }
           );
-          console.log("esta es la respuesta de reservarPista:", response);
+          console.log("esta es la respuesta de reservarPista: ", response);
           return true;
         } catch (error) {
           console.log(error);
@@ -182,11 +182,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           let response = await axios.get(
             urlserver + "/api/infopistas/" + id_pista
           );
-          setStore({ pistas: response.data });
-          return true;
+          // setStore({ pistas: response.data });
+          console.log(response.data);
+          return response.data.nombre;
         } catch (error) {
           console.log(error);
-          return false;
+          return "Hay un error al obtener el nombre";
         }
       },
     },

@@ -7,13 +7,19 @@ import { Calendar } from "../component/calendar.jsx";
 export const Single = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
+  const [titulo, setTitulo] = useState(null);
+
+  useEffect(() => {
+    async () => {
+      setTitulo(await actions.obtenerInfoPistas(params.theid));
+    };
+  }, []);
 
   return (
     <div className="jumbotron m-auto">
       <div className="tituloinstalacion m-auto">
         <h3 className="  text-center mt-1">
-          Este es el calendario de la instalacion:{" "}
-          {store.pistas[params.theid - 1].nombre}
+          Este es el calendario de la instalacion: {titulo}
         </h3>
       </div>
       <div className="calendarioinstalacion mt-4 text-center">
