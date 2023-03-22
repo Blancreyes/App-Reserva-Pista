@@ -70,9 +70,9 @@ export const Calendar = (props) => {
             <div
               onClick={() => handleBook(dia, hour)}
               key={dia + hour}
-              className="border border-success rounded-4"
+              className="btn btn-warning rounded-4"
             >
-              {dia + hour}
+              <strong>{dia + hour}</strong>
             </div>
           </td>
         );

@@ -17,7 +17,7 @@ export const Single = (props) => {
         </h3>
       </div>
       <div className="calendarioinstalacion mt-4 text-center">
-        <Calendar instalacion={store.demo[params.theid].title} />
+        <Calendar instalacion={params.theid} />
       </div>
       <hr className="my-4" />
 

@@ -84,16 +84,19 @@ def get_profile():
 
 #Endpoint para crear las reservas
 @api.route('/reservas', methods=['POST'])
+@jwt_required()
 def handle_create_reservas():
     #se debe pasar la información a formato json
     request_body=request.json
+    current_user = get_jwt_identity()
+    user_id = User.query.filter_by(id=current_user).first()
     #se verifica si la reserva ya existe
-    reservas_info_query=Reservas.query.filter_by(startTime=request_body["startTime"], user_id=request_body["user_id"]).first()
+    reservas_info_query=Reservas.query.filter_by(startTime=request_body["startTime"]).first()
     
     #Si la reserva no existe, entonces se crea reserva
     if reservas_info_query is None:
         reservas=Reservas(
-            user_id=request_body["user_id"],
+            user_id="user_id",
             pistas_id=request_body["pistas_id"],
             startTime=request_body["startTime"]
         )

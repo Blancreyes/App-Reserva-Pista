@@ -2,7 +2,7 @@ import axios from "axios";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      url: "https://3001-blancreyes-appreservame-6fwo88ofprc.ws-eu90.gitpod.io",
+      url: "https://3001-blancreyes-appreservame-voky3yyr4w1.ws-eu90.gitpod.io",
       message: null,
       demo: [
         {
@@ -144,9 +144,13 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
         const urlserver = store.url;
         try {
-          let response = await axios.get(urlserver + "/api/reservas", {
-            instalacion: instalacion,
-            stardate: dia + hora,
+          const mytoken = localStorage.getItem("token");
+          let response = await axios.post(urlserver + "/api/reservas", {
+            headers: {
+              Authorization: `Bearer ${mytoken}`,
+            },
+            pistas_id: instalacion,
+            startTime: dia + hora,
           });
           console.log("esta es la respuesta de compruebaUsuario:", response);
           return true;
