@@ -56,7 +56,7 @@ export const Acceso = () => {
       </div>
       <div className="m-auto text-center">
         ¿Olvidó su contraseña? Haga click{" "}
-        <a className="" href="/">
+        <a className="" href="/password">
           <strong>aquí</strong>
         </a>
       </div>
