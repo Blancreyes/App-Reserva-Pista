@@ -1,5 +1,8 @@
-import React, { useState } from "react";
-export const Calendar = () => {
+import React, { useState, useContext } from "react";
+import { Context } from "../store/appContext";
+
+export const Calendar = (props) => {
+  const { store, actions } = useContext(Context);
   const daysOfWeek = [
     "Lunes ",
     "Martes ",
@@ -24,6 +27,12 @@ export const Calendar = () => {
     "20:00",
     "21:00",
   ];
+  async function handleBook(dia, hora) {
+    console.log(dia, hora, props.instalacion);
+    let reservado = await actions.reservarPista(dia, hora, props.instalacion);
+  }
+
+  // Tomo las fechas para pintar el número de día del mes y la semana
   const currentWeek = new Date();
   const startOfWeek = new Date(
     currentWeek.getFullYear(),
@@ -58,8 +67,12 @@ export const Calendar = () => {
       const dayswithhour = daysOfWeek.map((dia) => {
         return (
           <td className="border-success rounded-4" key={dia}>
-            <div key={dia + hour} className="rounded-4  border border-success">
-              Free Hour {dia + hour}
+            <div
+              onClick={() => handleBook(dia, hour)}
+              key={dia + hour}
+              className="border border-success rounded-4"
+            >
+              {dia + hour}
             </div>
           </td>
         );
