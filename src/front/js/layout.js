@@ -7,6 +7,7 @@ import { Demo } from "./pages/demo";
 import { Alta_usuario } from "./pages/alta_usuario";
 import { Single } from "./pages/single";
 import { Password } from "./pages/password";
+import { Mis_reservas } from "./pages/mis_reservas";
 import { Acceso } from "./pages/acceso";
 import injectContext from "./store/appContext";
 
@@ -30,6 +31,7 @@ const Layout = () => {
             <Route element={<Demo />} path="/demo" />
             <Route element={<Alta_usuario />} path="/alta_usuario" />
             <Route element={<Password />} path="/password" />
+            <Route element={<Mis_reservas />} path="/mis_reservas" />
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<h1> Not found! </h1>} />
           </Routes>
