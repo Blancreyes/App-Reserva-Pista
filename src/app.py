@@ -12,6 +12,7 @@ from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_jwt_extended import JWTManager
+from flask_mail import Mail #IMPORTAR LA FUNCION Mail() de flask_mail
 
 #from models import Person
 
@@ -37,6 +38,22 @@ CORS(app)
 # Setup the Flask-JWT-Extended extension
 app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
 jwt = JWTManager(app)
+
+mail_settings = {
+    "MAIL_SERVER": 'sandbox.smtp.mailtrap.io',
+    "MAIL_PORT":  2525,
+    "MAIL_USE_TLS": True,
+    "MAIL_USE_SSL": False,
+    "MAIL_USERNAME":  '34eac7fc655adc', #ACA COLOQUEN EL CORREO DE LA APP DEL ALUMN
+    "MAIL_PASSWORD": '74da2dfbb47b7a', #PASSWORD DEL CORREO DE LA APP DEL ALUMNO
+    "MAIL_DEFAULT_SENDER": 'reservame@gmail.com'
+}
+
+app.config.update(mail_settings)
+mail = Mail(app)
+#agregan mail a la app y se va llamar en routes.py como current_app
+app.mail= mail
+
 
 # add the admin
 setup_admin(app)
@@ -67,6 +84,48 @@ def serve_any_other_file(path):
     response = send_from_directory(static_file_dir, path)
     response.cache_control.max_age = 0 # avoid cache memory
     return response
+
+# def send_email(user):
+#     token=user.get_token()
+#     msg=Message("Password Reset Request", recipients=[user.email], sender="noreplay@codejana.com")
+#     msg.body=f""" Para modificar tu contraseña, ingresa en el link que puedes ver abajo.
+    
+#     {url_for("reset_token" , token=token,_external=True)}
+    
+#     Si no has enviado una solicitud de restablecimiento de contraseña, por favor, ignora este mensaje.
+    
+#     ...
+    
+#     mail.send(msg)
+
+# @app.route('/password', methods=[("GET","POST")])
+# def reset_request():
+#     form=ResetRequestForm()
+#     if form.handleRecuperarPassword():
+#         user=User.query.filter_by(email=form.email.data).first()
+#             if user:
+#             send_email(user)
+#             flash("Le hemos enviado un correo para modificar su contraseña.","success")
+#             return redirect(url_for("acceso"))
+#     return render_template("password.html",title="Reset Request" , form=form, legend="Reset Request")
+
+# @app.route('/password/<token>', methods=[("GET","POST")])
+# def reset_token(token)
+#     user=User.verify_token(token)
+#     if user is None:
+#         flash("Este enlace no es válido, o ha expirado. Por favor, inténtalo de nuevo" , "Warning")
+#         return redirect(url_for("recuperar_password"))
+    
+#     form=ResetPasswordForm()
+#     if form.handleRecuperarPassword():
+#         hashed_password=bcrypt.generate_password_hash(form.password.data).decode("utf_8")
+#         user.password=hashed_password
+#         db.session.commit()
+#         flash("Contraseña modificada con éxito. Ya puedes acceder de nuevo","success")
+#         return redirect(url_for("acceso"))
+#     return render_template("cambiar_password.html",title="cambiar_password",legend="cambiar_password",form=form)
+              
+
 
 
 # this only runs if `$ python src/main.py` is executed
