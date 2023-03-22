@@ -4,28 +4,27 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       url: "https://3001-blancreyes-appreservame-voky3yyr4w1.ws-eu90.gitpod.io",
       message: null,
-      demo: [
-        {
-          title: "Piscina",
-          background: "white",
-          initial: "white",
-        },
-        {
-          title: "Pista Paddle",
-          background: "white",
-          initial: "white",
-        },
-        {
-          title: "Pista Tenis",
-          background: "white",
-          initial: "white",
-        },
-        {
-          title: "Campo de Futbol",
-          background: "white",
-          initial: "white",
-        },
-      ],
+      pistas: [],
+      // {
+      //   title: "Piscina",
+      //   background: "white",
+      //   initial: "white",
+      // },
+      // {
+      //   title: "Pista Paddle",
+      //   background: "white",
+      //   initial: "white",
+      // },
+      // {
+      //   title: "Pista Tenis",
+      //   background: "white",
+      //   initial: "white",
+      // },
+      // {
+      //   title: "Campo de Futbol",
+      //   background: "white",
+      //   initial: "white",
+      // },
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -70,7 +69,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             email: email,
             password: password,
           });
-          console.log("esta es la respuesta del Login:", response);
+          //   console.log("esta es la respuesta del Login:", response);
           localStorage.setItem("token", response.data.access_token);
           return true;
         } catch (error) {
@@ -89,7 +88,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       altaUsuario: async (name, lastname, email, password) => {
         const store = getStore();
         const urlserver = store.url;
-        console.log(urlserver);
+        // console.log(urlserver);
         try {
           let response = await axios.post(urlserver + "/api/user", {
             name: name,
@@ -114,7 +113,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               Authorization: `Bearer ${mytoken}`,
             },
           });
-          console.log("esta es la respuesta de compruebaUsuario:", response);
+          //   console.log("esta es la respuesta de compruebaUsuario:", response);
           return true;
         } catch (error) {
           console.log(error);
@@ -140,19 +139,50 @@ const getState = ({ getStore, getActions, setStore }) => {
           return false;
         }
       },
-      reservarPista: async function (dia, hora, instalacion) {
+      reservarPista: async (dia, hora, instalacion) => {
         const store = getStore();
         const urlserver = store.url;
         try {
           const mytoken = localStorage.getItem("token");
-          let response = await axios.post(urlserver + "/api/reservas", {
-            headers: {
-              Authorization: `Bearer ${mytoken}`,
+          let response = await axios.post(
+            urlserver + "/api/reservas",
+            {
+              pistas_id: instalacion,
+              startTime: dia + hora,
             },
-            pistas_id: instalacion,
-            startTime: dia + hora,
-          });
-          console.log("esta es la respuesta de compruebaUsuario:", response);
+            {
+              headers: {
+                Authorization: `Bearer ${mytoken}`,
+              },
+            }
+          );
+          console.log("esta es la respuesta de reservarPista:", response);
+          return true;
+        } catch (error) {
+          console.log(error);
+          return false;
+        }
+      },
+      obtenerPistas: async () => {
+        const store = getStore();
+        const urlserver = store.url;
+        try {
+          let response = await axios.get(urlserver + "/api/pistas");
+          setStore({ pistas: response.data });
+          return true;
+        } catch (error) {
+          console.log(error);
+          return false;
+        }
+      },
+      obtenerInfoPistas: async (id_pista) => {
+        const store = getStore();
+        const urlserver = store.url;
+        try {
+          let response = await axios.get(
+            urlserver + "/api/infopistas/" + id_pista
+          );
+          setStore({ pistas: response.data });
           return true;
         } catch (error) {
           console.log(error);

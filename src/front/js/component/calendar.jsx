@@ -28,7 +28,7 @@ export const Calendar = (props) => {
     "21:00",
   ];
   async function handleBook(dia, hora) {
-    console.log(dia, hora, props.instalacion);
+    console.log("A reservar:", dia, hora, "instalacion:", props.instalacion);
     let reservado = await actions.reservarPista(dia, hora, props.instalacion);
   }
 
