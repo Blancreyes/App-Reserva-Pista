@@ -224,17 +224,19 @@ def forgotpassword():
 def get_pistas():
     # Access the identity of the current user with get_jwt_identity
     pistas = Pistas.query.all()
-    print(pistas)
     results=list(map(lambda item: item.serialize(), pistas))
-    print(results)
-    # return jsonify({"result":user.serialize()}), 200
+   # return jsonify({"result":user.serialize()}), 200
     return jsonify(results), 200
 
-@api.route("/pista/<int:id>", methods=["GET"])
+# Con este ENDPOINT pretendemos traer solamente la infor de una pista determinada pasara por parametro
+@api.route("/infopista/<int:id>", methods=["GET"])
 def get_info_pista(id):
-    # Access the identity of the current user with get_jwt_identity
-    pista = Pistas.query.filter_by(id=id).first()
-    print(pista)
     
+    pista = Pistas.query.filter_by(id=id).first()
+    response_body = {
+        "msg":"Este es el nombre de la pista",
+        "nombre": pista.serialize()
+    }
+    print(response_body)
     # return jsonify({"result":user.serialize()}), 200
-    return jsonify(pista), 200
+    return jsonify(response_body), 200
