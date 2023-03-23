@@ -77,14 +77,15 @@ export const Calendar = (props) => {
           );
         });
         rowCells.push(
-          <td key={i} className="border border-success">
+          <td
+            key={i}
+            className="border border-success"
+            onClick={() => {
+              props.click(eventsForDay);
+            }}
+          >
             {eventsForDay.map((event, index) => (
-              <div
-                key={index}
-                className="event"
-                onClick={props.click}
-                name={index}
-              >
+              <div key={index} className="event" name={index}>
                 {event.title}
               </div>
             ))}

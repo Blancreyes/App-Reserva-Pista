@@ -10,8 +10,8 @@ export const Single = (props) => {
 
   let clicked = null;
 
-  function handleClick() {
-    console.log("clicked");
+  function handleClick(date) {
+    console.log(date);
   }
 
   return (
