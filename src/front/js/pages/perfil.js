@@ -2,24 +2,28 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { Calendar } from "../component/calendar.jsx";
 
-export const Single = (props) => {
+export const Perfil = (props) => {
   const { store, actions } = useContext(Context);
+  const [user, setUser] = useState();
   const params = useParams();
+
+  async function user_Info() {
+    // Esta funcion comprueba que se ha iniciado sesión en la base de datos previamente
+    // Si la autenticación es correcta, muestra contenido reservado a usuarios de la pagina
+    setUser(await actions.profile_info());
+    return user;
+  }
+
+  useEffect(() => {
+    user_Info();
+  }, []);
 
   return (
     <div className="jumbotron m-auto">
-      <div className="tituloinstalacion m-auto">
-        <h3 className="  text-center mt-1">
-          Este es el calendario de la instalacion:{" "}
-          {store.demo[params.theid].title}
-        </h3>
-      </div>
       <div className="calendarioinstalacion mt-4 text-center">
-        <Calendar />
+        <p>{user}</p>
       </div>
-      <hr className="my-4" />
 
       <Link className="text-end" to="/demo">
         <span
@@ -33,7 +37,6 @@ export const Single = (props) => {
     </div>
   );
 };
-
-Single.propTypes = {
+Perfil.propTypes = {
   match: PropTypes.object,
 };

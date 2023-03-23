@@ -82,6 +82,15 @@ def get_profile():
     # return jsonify({"result":user.serialize()}), 200
     return jsonify(logged_in_as = current_user), 200
 
+@api.route("/user_profile", methods=["GET"])
+@jwt_required()
+def get_userprofile():
+    
+    current_user = get_jwt_identity()
+    
+    user = User.query.filter_by(email=current_user).first()
+    return jsonify({"result":user.serialize()}), 200
+    
 #Endpoint para crear las reservas
 @api.route('/reservas', methods=['POST'])
 def handle_create_reservas():
@@ -114,8 +123,7 @@ def handle_create_reservas():
 #Consultar un reserva
 @api.route('/reservas/<int:user_id>', methods=['GET'])
 def handle_consult_reservas_byUserId(user_id):
-    #se debe pasar la información a formato json
-    request_body=request.json
+   
     
     #se verifica si la reserva ya existe
     reservas_info_query=Reservas.query.filter_by(user_id=user_id).all()
@@ -146,9 +154,7 @@ def handle_consult_reservas_byUserId(user_id):
 
 @api.route('/reservas', methods=['GET'])
 def handle_consult_reservas_all():
-    #se debe pasar la información a formato json
-    request_body=request.json
-    
+        
     #se verifica si la reserva ya existe
     reservas_info_query=Reservas.query.all()
     result=list(map(lambda item: item.serialize(), reservas_info_query))

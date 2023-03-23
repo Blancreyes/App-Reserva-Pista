@@ -8,27 +8,8 @@ const getState = ({
         store: {
             url: "https://3001-blancreyes-appreservame-7ol77yemo6o.ws-eu92.gitpod.io",
             message: null,
-            demo: [{
-                    title: "Piscina",
-                    background: "white",
-                    initial: "white",
-                },
-                {
-                    title: "Pista Paddle",
-                    background: "white",
-                    initial: "white",
-                },
-                {
-                    title: "Pista Tenis",
-                    background: "white",
-                    initial: "white",
-                },
-                {
-                    title: "Campo de Futbol",
-                    background: "white",
-                    initial: "white",
-                },
-            ],
+            demo: [],
+            miPerfil: [],
         },
         actions: {
             // Use getActions to call a function within a fuction
@@ -121,6 +102,29 @@ const getState = ({
                     return true;
                 } catch (error) {
                     console.log(error);
+                    return false;
+                }
+            },
+            profile_info: async () => {
+                const store = getStore();
+                const urlserver = store.url;
+
+                try {
+                    const mytoken = localStorage.getItem("token");
+
+                    let response = await axios.get(urlserver + "/api/user_profile", {
+                        headers: {
+                            Authorization: `Bearer ${mytoken}`,
+                        },
+                    });
+                    console.log(response);
+                    // localStorage.setItem("token", response.data.access_token);
+                    return true;
+                } catch (error) {
+                    console.log(error);
+                    if (error.response.status >= 400) {
+                        alert(error.response.data.msg);
+                    }
                     return false;
                 }
             },

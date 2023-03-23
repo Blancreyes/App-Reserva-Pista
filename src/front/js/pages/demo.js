@@ -55,7 +55,18 @@ export const Demo = () => {
         <h2 className="subtitle ms-2"> Mis Reservas </h2>{" "}
       </div>{" "}
       <div className="misreservas d-flex">
-        <h2 className="subtitle ms-2"> Mis Perfil </h2>{" "}
+        <Link
+          to={"/perfil"}
+          style={{
+            textDecoration: "none",
+            color: "#04740ddc",
+          }}
+        >
+          <h2 className="subtitle ms-2" style={{ cursor: "pointer" }}>
+            {" "}
+            Mi Perfil{" "}
+          </h2>{" "}
+        </Link>{" "}
       </div>{" "}
       <div className="m-3 text-end">
         <Link className="text-end" to="/">
