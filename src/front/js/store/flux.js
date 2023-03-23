@@ -6,7 +6,7 @@ const getState = ({
 }) => {
     return {
         store: {
-            url: "https://3001-blancreyes-appreservame-tn5fl8ytism.ws-eu92.gitpod.io",
+            url: "https://3001-blancreyes-appreservame-sjqt9eicfqa.ws-eu92.gitpod.io",
             message: null,
             pistas: [],
             // {
@@ -187,8 +187,8 @@ const getState = ({
                         urlserver + "/api/infopista/" + id_pista
                     );
                     // setStore({ pistas: response.data });
-                    console.log(response.data);
-                    return response.data.nombre;
+                    // console.log("respuesta de infoPistas", response);
+                    return response.data.result.nombre;
                 } catch (error) {
                     console.log(error);
                     return "Hay un error al obtener el nombre";

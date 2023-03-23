@@ -235,8 +235,8 @@ def get_info_pista(id):
     pista = Pistas.query.filter_by(id=id).first()
     response_body = {
         "msg":"Este es el nombre de la pista",
-        "nombre": pista.serialize()
+        "datosPista": pista.serialize()
     }
     print(response_body)
     # return jsonify({"result":user.serialize()}), 200
-    return jsonify(response_body), 200
+    return jsonify({"result":pista.serialize()}), 200

@@ -10,10 +10,13 @@ export const Single = (props) => {
   const [titulo, setTitulo] = useState(null);
 
   useEffect(() => {
-    async () => {
+    async function buscaTitulo() {
       setTitulo(await actions.obtenerInfoPistas(params.theid));
-    };
+    }
+    buscaTitulo();
   }, []);
+  console.log(titulo);
+  // const instalacion = titulo.data;
 
   return (
     <div className="jumbotron m-auto">

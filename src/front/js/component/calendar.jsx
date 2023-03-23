@@ -80,7 +80,9 @@ export const Calendar = (props) => {
 
       return (
         <tr key={hour}>
-          <td className="border border-success">{hour}</td>
+          <td className="border border-success">
+            <strong>{hour}</strong>
+          </td>
           {dayswithhour}
         </tr>
       );
