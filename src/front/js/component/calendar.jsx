@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 
 export const Calendar = (props) => {
@@ -71,13 +71,15 @@ export const Calendar = (props) => {
   const renderRows = () => {
     const rows = hoursOfDay.map((hour, index) => {
       const dayswithhour = daysOfWeek.map((dia) => {
+        console.log(store.startTime?.includes(dia + hour));
+        console.log(store.startTime);
         return (
           <td className="border-success rounded-4" key={dia}>
             <div
               onClick={() => handleBook(dia, hour)}
               key={dia + hour}
               className={
-                desactivado
+                store.startTime?.includes(dia + hour)
                   ? "btn btn-danger rounded-4"
                   : "btn btn-warning rounded-4"
               }
@@ -99,6 +101,9 @@ export const Calendar = (props) => {
     });
     return <tbody>{rows}</tbody>;
   };
+  useEffect(() => {
+    actions.obtenerStartTime(props.instalacion);
+  }, []);
   return (
     // Basicamente este componente indica la semana en la que estamos y pinta una tabla
     <div>

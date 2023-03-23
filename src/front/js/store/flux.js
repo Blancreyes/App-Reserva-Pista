@@ -6,7 +6,7 @@ const getState = ({
 }) => {
     return {
         store: {
-            url: "https://3001-blancreyes-appreservame-bmyprwe6egj.ws-eu92.gitpod.io",
+            url: "https://3001-blancreyes-appreservame-4oru3maccvl.ws-eu92.gitpod.io",
             message: null,
             pistas: [],
             // {
@@ -29,6 +29,7 @@ const getState = ({
             //   background: "white",
             //   initial: "white",
             // },
+            startTime: [],
         },
         actions: {
             // Use getActions to call a function within a fuction
@@ -189,6 +190,24 @@ const getState = ({
                     // setStore({ pistas: response.data });
                     // console.log("respuesta de infoPistas", response);
                     return response.data.result.nombre;
+                } catch (error) {
+                    console.log(error);
+                    return "Hay un error al obtener el nombre";
+                }
+            },
+            obtenerStartTime: async (id_pista) => {
+                const store = getStore();
+                const urlserver = store.url;
+                try {
+                    let response = await axios.get(
+                        urlserver + "/api/pistas/reservas/" + id_pista
+                    );
+                    // setStore({ pistas: response.data });
+                    console.log("respuesta de starTime", response.data.result);
+                    setStore({
+                        startTime: response.data.result,
+                    });
+                    return response;
                 } catch (error) {
                     console.log(error);
                     return "Hay un error al obtener el nombre";

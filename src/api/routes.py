@@ -113,7 +113,7 @@ def handle_create_reservas():
 @api.route('/reservas', methods=['GET'])
 def handle_consult_reservas():
     #se debe pasar la información a formato json
-    request_body=request.json
+    
     
     #se verifica si la reserva ya existe
     reservas_info_query=Reservas.query.filter_by(user_id=request_body["user_id"]).all()
@@ -240,3 +240,19 @@ def get_info_pista(id):
     print(response_body)
     # return jsonify({"result":user.serialize()}), 200
     return jsonify({"result":pista.serialize()}), 200
+
+@api.route('/pistas/reservas/<int:id_pista>', methods=['GET'])
+def handle_pistasreservas(id_pista):
+    #se debe pasar la información a formato json
+    #se verifica si la reserva ya existe
+    reservas_info_query=Reservas.query.filter_by(pistas_id=id_pista).all()
+    result=list(map(lambda item: item.startTime, reservas_info_query))
+    print(result)
+    
+    
+    response_body = {
+        # "msg": "Reserva existe",
+        "result": result
+        
+    }
+    return jsonify(response_body), 200
