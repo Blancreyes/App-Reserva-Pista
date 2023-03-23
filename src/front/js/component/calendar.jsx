@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-export const Calendar = () => {
+
+export const Calendar = (props) => {
   const [events, setEvents] = useState([
     { title: "Meeting", start_time: "9:00am" },
     { title: "Lunch", start_time: "12:00pm" },
@@ -78,7 +79,12 @@ export const Calendar = () => {
         rowCells.push(
           <td key={i} className="border border-success">
             {eventsForDay.map((event, index) => (
-              <div key={index} className="event">
+              <div
+                key={index}
+                className="event"
+                onClick={props.click}
+                name={index}
+              >
                 {event.title}
               </div>
             ))}
