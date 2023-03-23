@@ -9,9 +9,16 @@ export const Mis_reservas = () => {
 
   const [piscinaDia, setPiscinaDia] = useState("");
   const [piscinaHora, setPiscinaHora] = useState("");
+  const [anular, setAnular] = useState(false);
+  const [activado, setActivado] = useState(true);
+
+  function Disable() {
+    return <button area-disabled={true}>I am Disabled!</button>;
+  }
 
   const eliminarreservapiscina = (e) => {
     alert("Tu reserva para la piscina ha sido eliminada.");
+    setAnular(!anular);
     setPiscinaDia("");
     setPiscinaHora("");
   };
@@ -80,7 +87,8 @@ export const Mis_reservas = () => {
             type="text"
             className="form-control"
             id="apellidos"
-            value={piscinaDia}
+            // placeholder="{store..........}"
+            disabled
           />{" "}
         </div>{" "}
         <div className="col">
@@ -93,11 +101,11 @@ export const Mis_reservas = () => {
         </div>{" "}
         <div class="d-grid gap-1 d-md-block text-center col-1">
           <button
-            class="btn btn-outline-danger fw-bold"
             type="button"
             onClick={eliminarreservapiscina}
+            class={anular ? "btn-danger" : Disable()}
           >
-            ANULAR
+            {anular ? "ANULAR" : "ANULADO"}
           </button>
         </div>
       </div>{" "}
