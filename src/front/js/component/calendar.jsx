@@ -30,6 +30,10 @@ export const Calendar = (props) => {
   async function handleBook(dia, hora) {
     console.log("A reservar:", dia, hora, "instalacion:", props.instalacion);
     let reservado = await actions.reservarPista(dia, hora, props.instalacion);
+
+    reservado
+      ? alert("Instalacion reservada")
+      : alert("No pudo realizarse la reserva");
   }
 
   // Tomo las fechas para pintar el número de día del mes y la semana
