@@ -38,8 +38,8 @@ class Pistas(db.Model):
         return {
             "id": self.id,
             "nombre": self.nombre,
-            "usuario":self.usuario,
-            "reservas":self.reservas
+            "is_active": self.is_active
+            # "reservas":self.reservas
         }
         
 class Reservas(db.Model):
@@ -48,7 +48,7 @@ class Reservas(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
         nullable=False)
     pistas_id=db.Column(db.Integer, db.ForeignKey('pistas.id'), nullable=False)
-    startTime = db.Column(db.String(120), nullable=False)
+    startTime = db.Column(db.DateTime(), unique=True, nullable=False)
     # is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
     def __repr__(self):

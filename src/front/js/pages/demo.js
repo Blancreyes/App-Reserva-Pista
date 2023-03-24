@@ -12,7 +12,7 @@ export const Demo = () => {
     // Si la autenticación es correcta, muestra contenido reservado a usuarios de la pagina
     setLoggedIn(await actions.compruebaUsuario());
   }
-  // El useEffect no funciona aun bien
+
   useEffect(() => {
     checkLogin();
   }, []);
@@ -26,24 +26,21 @@ export const Demo = () => {
         <h2 className="subtitle ms-2"> Reservar Instalaciones </h2>{" "}
         <ul className="list-group w-50">
           {" "}
-          {store.demo.map((item, index) => {
+          {store.pistas.map((item, index) => {
             return (
               <li
                 key={index}
                 className="list-group-item d-flex justify-content-between"
-                style={{
-                  background: item.background,
-                }}
               >
                 <Link
-                  to={"/single/" + index}
+                  to={"/single/" + item.id}
                   style={{
                     textDecoration: "none",
                     color: "#04740ddc",
                   }}
                 >
                   <span>
-                    <strong> {item.title} </strong>{" "}
+                    <strong> {item.nombre} </strong>{" "}
                   </span>{" "}
                 </Link>{" "}
               </li>

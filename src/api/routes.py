@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint,current_app
-from api.models import db, User, Reservas
+from api.models import db, User, Reservas, Pistas
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -28,10 +28,8 @@ def handle_hello():
 def handle_create_user():
     #se debe pasar la información a formato json
     request_body=request.json
-    
     #se verifica si el usuario ya existe
     user_info_query=User.query.filter_by(email=request_body["email"]).first()
-    
     #Si el usuario no existe, entonces se crea usuario
     if user_info_query is None:
         user=User(
@@ -49,7 +47,7 @@ def handle_create_user():
         return jsonify(response_body), 200
     
     else:
-        return jsonify("Este usaurio ya existe"), 400
+        return jsonify("Este usuario ya existe"), 400
         
 
 # Create a route to authenticate your users and return JWTs. The
@@ -93,19 +91,19 @@ def get_userprofile():
     
 #Endpoint para crear las reservas
 @api.route('/reservas', methods=['POST'])
+@jwt_required()
 def handle_create_reservas():
     #se debe pasar la información a formato json
     request_body=request.json
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email=current_user).first()
     #se verifica si la reserva ya existe
-    
     reservas_info_query=Reservas.query.filter_by(startTime=request_body["startTime"], user_id=request_body["user_id"]).first()
-    
-    print(reservas_info_query)
     
     #Si la reserva no existe, entonces se crea reserva
     if reservas_info_query is None:
         reservas=Reservas(
-            user_id=request_body["user_id"],
+            user_id=user.id,
             pistas_id=request_body["pistas_id"],
             startTime=request_body["startTime"]
         )
@@ -153,8 +151,10 @@ def handle_consult_reservas_byUserId(user_id):
         return jsonify("El usuario introducido no posee reservas o no existe"), 400
 
 @api.route('/reservas', methods=['GET'])
-def handle_consult_reservas_all():
-        
+def handle_consult_reservas():
+    #se debe pasar la información a formato json
+    request_body=request.json
+    
     #se verifica si la reserva ya existe
     reservas_info_query=Reservas.query.all()
     result=list(map(lambda item: item.serialize(), reservas_info_query))
@@ -258,3 +258,41 @@ def forgotpassword():
     msg.html = f"""<h1>Su nueva contraseña es: {recover_password}</h1>"""
     current_app.mail.send(msg)
     return jsonify({"msg": "Su nueva clave ha sido enviada al correo electrónico ingresado"}), 200
+
+
+@api.route("/pistas", methods=["GET"])
+def get_pistas():
+    # Access the identity of the current user with get_jwt_identity
+    pistas = Pistas.query.all()
+    results=list(map(lambda item: item.serialize(), pistas))
+   # return jsonify({"result":user.serialize()}), 200
+    return jsonify(results), 200
+
+# Con este ENDPOINT pretendemos traer solamente la infor de una pista determinada pasara por parametro
+@api.route("/infopista/<int:id>", methods=["GET"])
+def get_info_pista(id):
+    
+    pista = Pistas.query.filter_by(id=id).first()
+    response_body = {
+        "msg":"Este es el nombre de la pista",
+        "datosPista": pista.serialize()
+    }
+    print(response_body)
+    # return jsonify({"result":user.serialize()}), 200
+    return jsonify({"result":pista.serialize()}), 200
+
+@api.route('/pistas/reservas/<int:id_pista>', methods=['GET'])
+def handle_pistasreservas(id_pista):
+    #se debe pasar la información a formato json
+    #se verifica si la reserva ya existe
+    reservas_info_query=Reservas.query.filter_by(pistas_id=id_pista).all()
+    result=list(map(lambda item: item.startTime, reservas_info_query))
+    print(result)
+    
+    
+    response_body = {
+        # "msg": "Reserva existe",
+        "result": result
+        
+    }
+    return jsonify(response_body), 200
