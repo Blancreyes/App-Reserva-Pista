@@ -6,16 +6,13 @@ import { useNavigate } from "react-router-dom";
 export const Mis_reservas = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
-
-  const [piscinaDia, setPiscinaDia] = useState("");
-  const [piscinaHora, setPiscinaHora] = useState("");
+  const [piscinaDiaHora, setPiscinaDiaHora] = useState("");
   const [disable, setDisable] = useState(false);
 
   const eliminarreservapiscina = () => {
     setDisable(true);
     alert("Tu reserva para la piscina ha sido eliminada.");
-    setPiscinaDia("");
-    setPiscinaHora("");
+    setPiscinaDiaHora("");
   };
   const instalacionescalendario = () => {
     navigate("/demo");
@@ -52,16 +49,7 @@ export const Mis_reservas = () => {
             className="input-group-text fs-4 justify-content-center fw-bold"
           >
             {" "}
-            DÍA{" "}
-          </span>{" "}
-        </div>{" "}
-        <div className="col">
-          <span
-            id="color-fuente"
-            className="input-group-text fs-4 justify-content-center fw-bold"
-          >
-            {" "}
-            HORA{" "}
+            DIA / HORA{" "}
           </span>{" "}
         </div>{" "}
         <div className="col-1"></div>
@@ -82,15 +70,7 @@ export const Mis_reservas = () => {
             type="text"
             className="form-control"
             id="apellidos"
-            value={piscinaDia}
-          />{" "}
-        </div>{" "}
-        <div className="col">
-          <input
-            type="text"
-            className="form-control"
-            id="apellidos"
-            value={piscinaHora}
+            value={piscinaDiaHora}
           />{" "}
         </div>{" "}
         <div class="d-grid gap-1 d-md-block text-center col-1">

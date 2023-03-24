@@ -6,7 +6,7 @@ const getState = ({
 }) => {
     return {
         store: {
-            url: "https://3001-blancreyes-appreservame-23j00vrr8of.ws-eu92.gitpod.io",
+            url: "https://3001-blancreyes-appreservame-9cuhscrw5g6.ws-eu92.gitpod.io",
             message: null,
             demo: [{
                     title: "Piscina",
@@ -134,6 +134,26 @@ const getState = ({
                     });
                     console.log(response);
                     // localStorage.setItem("token", response.data.access_token);
+                    return true;
+                } catch (error) {
+                    console.log(error);
+                    if (error.response.status >= 400) {
+                        alert(error.response.data.msg);
+                    }
+                    return false;
+                }
+            },
+            informacion_reservas: async (id) => {
+                try {
+                    const store = getStore();
+                    const urlserver = store.url;
+                    console.log(urlserver);
+                    let response = await axios.get(
+                        urlserver + "/api/reservas/<int:user_id>", {
+                            id: id,
+                        }
+                    );
+                    console.log(response);
                     return true;
                 } catch (error) {
                     console.log(error);
