@@ -7,12 +7,33 @@ export const Mis_reservas = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
   const [piscinaDiaHora, setPiscinaDiaHora] = useState("");
-  const [disable, setDisable] = useState(false);
+  const [paddleDiaHora, setPaddleDiaHora] = useState("");
+  const [tenisDiaHora, setTenisDiaHora] = useState("");
+  const [futbolDiaHora, setFutbolDiaHora] = useState("");
+  const [disablePiscina, setDisablePiscina] = useState(false);
+  const [disablePaddle, setDisablePaddle] = useState(false);
+  const [disableTenis, setDisableTenis] = useState(false);
+  const [disableFutbol, setDisableFutbol] = useState(false);
 
   const eliminarreservapiscina = () => {
-    setDisable(true);
+    setDisablePiscina(true);
     alert("Tu reserva para la piscina ha sido eliminada.");
     setPiscinaDiaHora("");
+  };
+  const eliminarreservapaddle = () => {
+    setDisablePaddle(true);
+    alert("Tu reserva para la pista de paddle ha sido eliminada.");
+    setPaddleDiaHora("");
+  };
+  const eliminarreservatenis = () => {
+    setDisableTenis(true);
+    alert("Tu reserva para la pista de tenis ha sido eliminada.");
+    setTenisDiaHora("");
+  };
+  const eliminarreservafutbol = () => {
+    setDisableFutbol(true);
+    alert("Tu reserva para el campo de futbol ha sido eliminada.");
+    setFutbolDiaHora("");
   };
   const instalacionescalendario = () => {
     navigate("/demo");
@@ -75,46 +96,16 @@ export const Mis_reservas = () => {
         </div>{" "}
         <div class="d-grid gap-1 d-md-block text-center col-1">
           <button
+            id="Piscina"
             className={
-              disable ? "btn-secondary" : "btn btn-outline-danger fw-bold"
+              disablePiscina
+                ? "btn-secondary"
+                : "btn btn-outline-danger fw-bold"
             }
-            disabled={disable}
+            disabled={disablePiscina}
             onClick={eliminarreservapiscina}
           >
-            {disable ? "ANULADO" : "ANULAR"}
-          </button>
-        </div>
-      </div>{" "}
-      {/* <div className="row g-4 my-4">
-        <div className="col-1"></div>
-        <div className="col ">
-          <span
-            id="color-fuente"
-            className="input-group-text fs-4 justify-content-center fw-normal"
-          >
-            {" "}
-            PISTA DE PADDLE{" "}
-          </span>{" "}
-        </div>{" "}
-        <div className="col">
-          <input
-            type="text"
-            className="form-control"
-            id="apellidos"
-            value={dia}
-          />{" "}
-        </div>{" "}
-        <div className="col">
-          <input
-            type="text"
-            className="form-control"
-            id="apellidos"
-            value={hora}
-          />{" "}
-        </div>{" "}
-        <div class="d-grid gap-1 d-md-block text-center col-1">
-          <button class="btn btn-outline-danger fw-bold" type="button">
-            ANULAR
+            {disablePiscina ? "ANULADO" : "ANULAR"}
           </button>
         </div>
       </div>{" "}
@@ -126,7 +117,7 @@ export const Mis_reservas = () => {
             className="input-group-text fs-4 justify-content-center fw-normal"
           >
             {" "}
-            PISTA DE TENIS{" "}
+            PISTA PADDLE{" "}
           </span>{" "}
         </div>{" "}
         <div className="col">
@@ -134,20 +125,19 @@ export const Mis_reservas = () => {
             type="text"
             className="form-control"
             id="apellidos"
-            value={dia}
-          />{" "}
-        </div>{" "}
-        <div className="col">
-          <input
-            type="text"
-            className="form-control"
-            id="apellidos"
-            value={hora}
+            value={paddleDiaHora}
           />{" "}
         </div>{" "}
         <div class="d-grid gap-1 d-md-block text-center col-1">
-          <button class="btn btn-outline-danger fw-bold" type="button">
-            ANULAR
+          <button
+            id="Paddle"
+            className={
+              disablePaddle ? "btn-secondary" : "btn btn-outline-danger fw-bold"
+            }
+            disabled={disablePaddle}
+            onClick={eliminarreservapaddle}
+          >
+            {disablePaddle ? "ANULADO" : "ANULAR"}
           </button>
         </div>
       </div>{" "}
@@ -159,7 +149,7 @@ export const Mis_reservas = () => {
             className="input-group-text fs-4 justify-content-center fw-normal"
           >
             {" "}
-            CAMPO DE FUTBOL{" "}
+            PISTA TENIS{" "}
           </span>{" "}
         </div>{" "}
         <div className="col">
@@ -167,23 +157,52 @@ export const Mis_reservas = () => {
             type="text"
             className="form-control"
             id="apellidos"
-            value={dia}
+            value={tenisDiaHora}
           />{" "}
+        </div>{" "}
+        <div class="d-grid gap-1 d-md-block text-center col-1">
+          <button
+            className={
+              disableTenis ? "btn-secondary" : "btn btn-outline-danger fw-bold"
+            }
+            disabled={disableTenis}
+            onClick={eliminarreservatenis}
+          >
+            {disableTenis ? "ANULADO" : "ANULAR"}
+          </button>
+        </div>
+      </div>{" "}
+      <div className="row g-4 my-4">
+        <div className="col-1"></div>
+        <div className="col ">
+          <span
+            id="color-fuente"
+            className="input-group-text fs-4 justify-content-center fw-normal"
+          >
+            {" "}
+            CAMPO FULBOL{" "}
+          </span>{" "}
         </div>{" "}
         <div className="col">
           <input
             type="text"
             className="form-control"
             id="apellidos"
-            value={hora}
+            value={futbolDiaHora}
           />{" "}
         </div>{" "}
         <div class="d-grid gap-1 d-md-block text-center col-1">
-          <button class="btn btn-outline-danger fw-bold" type="button">
-            ANULAR
+          <button
+            className={
+              disableFutbol ? "btn-secondary" : "btn btn-outline-danger fw-bold"
+            }
+            disabled={disableFutbol}
+            onClick={eliminarreservafutbol}
+          >
+            {disableFutbol ? "ANULADO" : "ANULAR"}
           </button>
         </div>
-      </div>{" "} */}
+      </div>{" "}
       <div className="d-grid gap-2 col-5 mx-auto my-3">
         <button
           id="boton-guardar"
