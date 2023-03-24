@@ -6,28 +6,13 @@ const getState = ({
 }) => {
     return {
         store: {
-            url: "https://3001-blancreyes-appreservame-4oru3maccvl.ws-eu92.gitpod.io",
+            url: "https://3001-blancreyes-appreservame-jjqj1x32c3f.ws-eu92.gitpod.io",
             message: null,
             pistas: [],
-            // {
-            //   title: "Piscina",
-            //   background: "white",
-            //   initial: "white",
-            // },
-            // {
+            // { title: "Piscina",
             //   title: "Pista Paddle",
-            //   background: "white",
-            //   initial: "white",
-            // },
-            // {
             //   title: "Pista Tenis",
-            //   background: "white",
-            //   initial: "white",
-            // },
-            // {
             //   title: "Campo de Futbol",
-            //   background: "white",
-            //   initial: "white",
             // },
             startTime: [],
         },
@@ -203,14 +188,14 @@ const getState = ({
                         urlserver + "/api/pistas/reservas/" + id_pista
                     );
                     // setStore({ pistas: response.data });
-                    console.log("respuesta de starTime", response.data.result);
+                    console.log("respuesta de startTime", response.data.result);
                     setStore({
                         startTime: response.data.result,
                     });
                     return response;
                 } catch (error) {
                     console.log(error);
-                    return "Hay un error al obtener el nombre";
+                    return "Hay un error al obtener startTime";
                 }
             },
         },
