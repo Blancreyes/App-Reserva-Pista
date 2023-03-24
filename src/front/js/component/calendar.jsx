@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-export const Calendar = () => {
-  const [events, setEvents] = useState([
-    { title: "Meeting", start_time: "9:00am" },
-    { title: "Lunch", start_time: "12:00pm" },
-    { title: "Conference Call", start_time: "2:00pm" },
-  ]);
+import React, { useState, useContext, useEffect } from "react";
+import { Context } from "../store/appContext";
+
+export const Calendar = (props) => {
+  const { store, actions } = useContext(Context);
+
   const daysOfWeek = [
     "Lunes ",
     "Martes ",
@@ -15,7 +14,7 @@ export const Calendar = () => {
     "Domingo ",
   ];
   const hoursOfDay = [
-    "9:00",
+    "09:00",
     "10:00",
     "11:00",
     "12:00",
@@ -29,6 +28,16 @@ export const Calendar = () => {
     "20:00",
     "21:00",
   ];
+  async function handleBook(dia, hora) {
+    console.log("A reservar:", dia, hora, "instalacion:", props.instalacion);
+    let reservado = await actions.reservarPista(dia, hora, props.instalacion);
+
+    if (reservado) {
+      alert("Instalacion reservada");
+    } else alert("No pudo realizarse la reserva");
+  }
+
+  // Tomo las fechas para pintar el número de día del mes y la semana
   const currentWeek = new Date();
   const startOfWeek = new Date(
     currentWeek.getFullYear(),
@@ -40,7 +49,7 @@ export const Calendar = () => {
     currentWeek.getMonth(),
     currentWeek.getDate() - currentWeek.getDay() + 7
   );
-
+  // Esta funcion recorre el array "day" y pinta la cabecera de la tabla
   const renderHeader = () => {
     const headerCells = daysOfWeek.map((day) => {
       return (
@@ -60,40 +69,40 @@ export const Calendar = () => {
   };
   const renderRows = () => {
     const rows = hoursOfDay.map((hour, index) => {
-      const rowCells = [];
-      for (let i = 0; i < 7; i++) {
-        const eventsForDay = events.filter((e) => {
-          const startTime = new Date(
-            startOfWeek.getFullYear(),
-            startOfWeek.getMonth(),
-            startOfWeek.getDate() + i,
-            hour.split(":")[0],
-            hour.split(":")[1]
-          ).getTime();
-          return (
-            // startTime >= startOfWeek.getTime() && endTime <= endOfWeek.getTime()
-            startTime >= startOfWeek.getTime()
-          );
-        });
-        rowCells.push(
-          <td key={i} className="border border-success">
-            {eventsForDay.map((event, index) => (
-              <div key={index} className="event">
-                {event.title}
-              </div>
-            ))}
+      const dayswithhour = daysOfWeek.map((dia) => {
+        console.log(store.startTime?.includes(dia + hour));
+        console.log(store.startTime);
+        return (
+          <td className="border-success rounded-4" key={dia}>
+            <div
+              onClick={() => handleBook(dia, hour)}
+              key={dia + hour}
+              className={
+                store.startTime?.includes(dia + hour)
+                  ? "btn btn-danger rounded-4"
+                  : "btn btn-warning rounded-4"
+              }
+            >
+              <strong>{dia + hour}</strong>
+            </div>
           </td>
         );
-      }
+      });
+
       return (
         <tr key={hour}>
-          <td className="border border-success">{hour}</td>
-          {rowCells}
+          <td className="border border-success">
+            <strong>{hour}</strong>
+          </td>
+          {dayswithhour}
         </tr>
       );
     });
     return <tbody>{rows}</tbody>;
   };
+  useEffect(() => {
+    actions.obtenerStartTime(props.instalacion);
+  }, []);
   return (
     // Basicamente este componente indica la semana en la que estamos y pinta una tabla
     <div>

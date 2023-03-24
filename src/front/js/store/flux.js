@@ -6,29 +6,15 @@ const getState = ({
 }) => {
     return {
         store: {
-            url: "https://3001-blancreyes-appreservame-6fwo88ofprc.ws-eu90.gitpod.io",
+            url: "https://3001-blancreyes-appreservame-jjqj1x32c3f.ws-eu92.gitpod.io",
             message: null,
-            demo: [{
-                    title: "Piscina",
-                    background: "white",
-                    initial: "white",
-                },
-                {
-                    title: "Pista Paddle",
-                    background: "white",
-                    initial: "white",
-                },
-                {
-                    title: "Pista Tenis",
-                    background: "white",
-                    initial: "white",
-                },
-                {
-                    title: "Campo de Futbol",
-                    background: "white",
-                    initial: "white",
-                },
-            ],
+            pistas: [],
+            // { title: "Piscina",
+            //   title: "Pista Paddle",
+            //   title: "Pista Tenis",
+            //   title: "Campo de Futbol",
+            // },
+            startTime: [],
         },
         actions: {
             // Use getActions to call a function within a fuction
@@ -73,7 +59,7 @@ const getState = ({
                         email: email,
                         password: password,
                     });
-                    console.log("esta es la respuesta del Login:", response);
+                    //   console.log("esta es la respuesta del Login:", response);
                     localStorage.setItem("token", response.data.access_token);
                     return true;
                 } catch (error) {
@@ -92,7 +78,7 @@ const getState = ({
             altaUsuario: async (name, lastname, email, password) => {
                 const store = getStore();
                 const urlserver = store.url;
-                console.log(urlserver);
+                // console.log(urlserver);
                 try {
                     let response = await axios.post(urlserver + "/api/user", {
                         name: name,
@@ -117,7 +103,7 @@ const getState = ({
                             Authorization: `Bearer ${mytoken}`,
                         },
                     });
-                    console.log("esta es la respuesta de compruebaUsuario:", response);
+                    //   console.log("esta es la respuesta de compruebaUsuario:", response);
                     return true;
                 } catch (error) {
                     console.log(error);
@@ -141,6 +127,75 @@ const getState = ({
                         alert(error.response.data.msg);
                     }
                     return false;
+                }
+            },
+            reservarPista: async (dia, hora, instalacion) => {
+                const store = getStore();
+                const urlserver = store.url;
+                try {
+                    const mytoken = localStorage.getItem("token");
+                    let response = await axios.post(
+                        urlserver + "/api/reservas", {
+                            pistas_id: instalacion,
+                            startTime: dia + hora,
+                        }, {
+                            headers: {
+                                Authorization: `Bearer ${mytoken}`,
+                            },
+                        }
+                    );
+                    console.log("esta es la respuesta de reservarPista: ", response);
+                    return true;
+                } catch (error) {
+                    console.log(error);
+                    return false;
+                }
+            },
+            obtenerPistas: async () => {
+                const store = getStore();
+                const urlserver = store.url;
+                try {
+                    let response = await axios.get(urlserver + "/api/pistas");
+                    setStore({
+                        pistas: response.data,
+                    });
+                    return true;
+                } catch (error) {
+                    console.log(error);
+                    return false;
+                }
+            },
+            obtenerInfoPistas: async (id_pista) => {
+                const store = getStore();
+                const urlserver = store.url;
+                try {
+                    let response = await axios.get(
+                        urlserver + "/api/infopista/" + id_pista
+                    );
+                    // setStore({ pistas: response.data });
+                    // console.log("respuesta de infoPistas", response);
+                    return response.data.result.nombre;
+                } catch (error) {
+                    console.log(error);
+                    return "Hay un error al obtener el nombre";
+                }
+            },
+            obtenerStartTime: async (id_pista) => {
+                const store = getStore();
+                const urlserver = store.url;
+                try {
+                    let response = await axios.get(
+                        urlserver + "/api/pistas/reservas/" + id_pista
+                    );
+                    // setStore({ pistas: response.data });
+                    console.log("respuesta de startTime", response.data.result);
+                    setStore({
+                        startTime: response.data.result,
+                    });
+                    return response;
+                } catch (error) {
+                    console.log(error);
+                    return "Hay un error al obtener startTime";
                 }
             },
         },
