@@ -63,7 +63,11 @@ export const Perfil_Usuario = () => {
             </div>
           </div>
           <div className="text-center">
-            <button type="submit" className="btn btn-success mb-3 m-auto">
+            <button
+              type="submit"
+              className="btn btn-success mb-3 m-auto"
+              // onClick={handleUpdateInfo}
+            >
               Edit Info
             </button>
           </div>
