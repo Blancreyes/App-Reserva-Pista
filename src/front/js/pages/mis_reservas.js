@@ -9,16 +9,11 @@ export const Mis_reservas = () => {
 
   const [piscinaDia, setPiscinaDia] = useState("");
   const [piscinaHora, setPiscinaHora] = useState("");
-  const [anular, setAnular] = useState(false);
-  const [activado, setActivado] = useState(true);
+  const [disable, setDisable] = useState(false);
 
-  function Disable() {
-    return <button area-disabled={true}>I am Disabled!</button>;
-  }
-
-  const eliminarreservapiscina = (e) => {
+  const eliminarreservapiscina = () => {
+    setDisable(true);
     alert("Tu reserva para la piscina ha sido eliminada.");
-    setAnular(!anular);
     setPiscinaDia("");
     setPiscinaHora("");
   };
@@ -26,16 +21,16 @@ export const Mis_reservas = () => {
     navigate("/demo");
   };
 
-  async function handleRecuperarPassword(e) {
-    let recover = await actions.recover_password(email);
-    if (recover) {
-      setEmail("");
-      alert(
-        "Se ha enviado un correo electrónico con las instrucciones para modificar la contraseña"
-      );
-      navigate("/acceso");
-    }
-  }
+  // async function handleRecuperarPassword(e) {
+  //   let recover = await actions.recover_password(email);
+  //   if (recover) {
+  //     setEmail("");
+  //     alert(
+  //       "Se ha enviado un correo electrónico con las instrucciones para modificar la contraseña"
+  //     );
+  //     navigate("/acceso");
+  //   }
+  // }
 
   return (
     <div className="container-lg">
@@ -87,8 +82,7 @@ export const Mis_reservas = () => {
             type="text"
             className="form-control"
             id="apellidos"
-            // placeholder="{store..........}"
-            disabled
+            value={piscinaDia}
           />{" "}
         </div>{" "}
         <div className="col">
@@ -101,11 +95,13 @@ export const Mis_reservas = () => {
         </div>{" "}
         <div class="d-grid gap-1 d-md-block text-center col-1">
           <button
-            type="button"
+            className={
+              disable ? "btn-secondary" : "btn btn-outline-danger fw-bold"
+            }
+            disabled={disable}
             onClick={eliminarreservapiscina}
-            class={anular ? "btn-danger" : Disable()}
           >
-            {anular ? "ANULAR" : "ANULADO"}
+            {disable ? "ANULADO" : "ANULAR"}
           </button>
         </div>
       </div>{" "}
