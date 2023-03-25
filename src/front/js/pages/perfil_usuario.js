@@ -38,7 +38,7 @@ export const Perfil_Usuario = () => {
           </div>
           <div className="row mb-3">
             <label for="inputLastName" className="col-sm-2 col-form-label">
-              Apellidos
+              Apellido
             </label>
             <div className="col-sm-10">
               <input
