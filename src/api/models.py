@@ -55,9 +55,11 @@ class Reservas(db.Model):
         return f'<reservas {self.id}>'
 
     def serialize(self):
+        data_pista = Pistas.query.filter_by(id=self.pistas_id).first()
         return {
             "id": self.id,
             "user_id" : self.user_id,
             "pistas_id" : self.pistas_id,
+            "nombre_pista": data_pista.nombre,
             "startTime": self.startTime
         }

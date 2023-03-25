@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/component.css";
 import { useNavigate } from "react-router-dom";
@@ -41,12 +41,13 @@ export const Mis_reservas = () => {
   };
   useEffect(() => {
     async function reservas_usuario() {
-      setReservas(await actions.reservas_usuario());
+      //setReservas(await actions.reservas_usuario());
+      await actions.get_usario_reservas();
     }
 
     reservas_usuario();
   }, []);
-  console.log(setReservas);
+  //console.log(setReservas);
 
   // async function handleRecuperarPassword(e) {
   //   let recover = await actions.recover_password(email);
@@ -58,8 +59,13 @@ export const Mis_reservas = () => {
   //     navigate("/acceso");
   //   }
   // }
+  const misReservas = store.reservas_usuario.reservas;
+  console.log(misReservas);
 
   return (
+    // {misReservas.map((item,index) => {
+
+    // })}
     <div className="container-lg">
       <div className="fw-bold text-center fs-2 mt-1 mb-0"> MIS RESERVAS </div>{" "}
       <div className="row g-3 mt-0 mb-4  ">
