@@ -12,7 +12,7 @@ export const Demo = () => {
     // Si la autenticación es correcta, muestra contenido reservado a usuarios de la pagina
     setLoggedIn(await actions.compruebaUsuario());
   }
-  // El useEffect no funciona aun bien
+
   useEffect(() => {
     checkLogin();
   }, []);
@@ -26,24 +26,21 @@ export const Demo = () => {
         <h2 className="subtitle ms-2"> Reservar Instalaciones </h2>{" "}
         <ul className="list-group w-50">
           {" "}
-          {store.demo.map((item, index) => {
+          {store.pistas.map((item, index) => {
             return (
               <li
                 key={index}
                 className="list-group-item d-flex justify-content-between"
-                style={{
-                  background: item.background,
-                }}
               >
                 <Link
-                  to={"/single/" + index}
+                  to={"/single/" + item.id}
                   style={{
                     textDecoration: "none",
                     color: "#04740ddc",
                   }}
                 >
                   <span>
-                    <strong> {item.title} </strong>{" "}
+                    <strong> {item.nombre} </strong>{" "}
                   </span>{" "}
                 </Link>{" "}
               </li>
@@ -54,9 +51,17 @@ export const Demo = () => {
       <div className="misreservas d-flex">
         <h2 className="subtitle ms-2"> Mis Reservas </h2>{" "}
       </div>{" "}
-      <div className="misreservas d-flex">
-        <h2 className="subtitle ms-2"> Mis Perfil </h2>{" "}
-      </div>{" "}
+      <Link
+        to={"/perfil_usuario"}
+        style={{
+          textDecoration: "none",
+          color: "#04740ddc",
+        }}
+      >
+        <div className="misreservas d-flex">
+          <h2 className="subtitle ms-2"> Mi Perfil </h2>{" "}
+        </div>{" "}
+      </Link>{" "}
       <div className="m-3 text-end">
         <Link className="text-end" to="/">
           <button

@@ -10,8 +10,8 @@ def setup_admin(app):
     admin = Admin(app, name='4Geeks Admin', template_mode='bootstrap3')
 
     class ReservasAdmin(ModelView):
-        column_list = ("id", "user_id", "pistas_id", "startTime")
-        form_columns = ("user_id", "pistas_id", "startTime")
+        column_list = ("id", "user_id", "pistas_id","startTime", )
+        form_columns = ("user_id", "pistas_id","startTime")
         column_hide_backrefs = False
     class UserAdmin(ModelView):
         column_list = ("id", "name", "lastname", "email", "password")
