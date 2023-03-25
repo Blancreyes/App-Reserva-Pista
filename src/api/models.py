@@ -48,8 +48,8 @@ class Reservas(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
         nullable=False)
     pistas_id=db.Column(db.Integer, db.ForeignKey('pistas.id'), nullable=False)
+
     startTime = db.Column(db.String(120), unique=True, nullable=False)
-    # is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
     def __repr__(self):
         return f'<reservas {self.id}>'

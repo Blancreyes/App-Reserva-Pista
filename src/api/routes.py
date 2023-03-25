@@ -120,8 +120,42 @@ def handle_consult_reservas_byUserId(user_id):
     else:
         return jsonify("El usuario introducido no posee reservas o no existe"), 400
 
+@api.route('/reservas/<int:user_id>', methods=['GET'])
+def handle_consult_reservas_byUserId(user_id):
+    #se debe pasar la información a formato json
+    request_body=request.json
+    
+    #se verifica si la reserva ya existe
+    reservas_info_query=Reservas.query.filter_by(user_id=user_id).all()
+    result=list(map(lambda item: item.serialize(), reservas_info_query))
+    print(result)
+    
+    # startTime=request_body["startTime"], 
+    
+    #Si la reserva no existe, entonces se crea reserva
+    # if reservas_info_query is None:
+    #     reservas=Reservas(
+    #         user_id=request_body["user_id"],
+    #         pistas_id=request_body["pistas_id"],
+    #         startTime=request_body["startTime"]
+    #     )
+        
+    #     db.session.add(reservas)
+    #     db.session.commit()
+    if reservas_info_query:
+        response_body = {
+            "msg": "Reserva existentes para este usuario",
+            "result": result
+            
+        }
+        return jsonify(response_body), 200
+    else:
+        return jsonify("El usuario introducido no posee reservas o no existe"), 400
+
 @api.route('/reservas', methods=['GET'])
-def handle_consult_reservas():
+def handle_consult_reservas_all():
+    #se debe pasar la información a formato json
+    
     
     #se verifica si la reserva ya existe
     # reservas_info_query=Reservas.query.all()

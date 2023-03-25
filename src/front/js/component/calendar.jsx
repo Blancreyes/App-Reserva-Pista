@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 
 export const Calendar = (props) => {
   const { store, actions } = useContext(Context);
-  const [desactivado, setDesactivado] = useState(false);
+
   const daysOfWeek = [
     "Lunes ",
     "Martes ",
@@ -34,7 +34,6 @@ export const Calendar = (props) => {
 
     if (reservado) {
       alert("Instalacion reservada");
-      setDesactivado(true);
     } else alert("No pudo realizarse la reserva");
   }
 

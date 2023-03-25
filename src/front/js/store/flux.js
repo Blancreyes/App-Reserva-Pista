@@ -9,25 +9,10 @@ const getState = ({
             url: "https://3001-blancreyes-appreservame-9rrm12j4vvl.ws-eu92.gitpod.io",
             message: null,
             pistas: [],
-            // {
-            //   title: "Piscina",
-            //   background: "white",
-            //   initial: "white",
-            // },
-            // {
+            // { title: "Piscina",
             //   title: "Pista Paddle",
-            //   background: "white",
-            //   initial: "white",
-            // },
-            // {
             //   title: "Pista Tenis",
-            //   background: "white",
-            //   initial: "white",
-            // },
-            // {
             //   title: "Campo de Futbol",
-            //   background: "white",
-            //   initial: "white",
             // },
             startTime: [],
             user_data: [],
@@ -236,14 +221,14 @@ const getState = ({
                         urlserver + "/api/pistas/reservas/" + id_pista
                     );
                     // setStore({ pistas: response.data });
-                    console.log("respuesta de starTime", response.data.result);
+                    console.log("respuesta de startTime", response.data.result);
                     setStore({
                         startTime: response.data.result,
                     });
                     return response;
                 } catch (error) {
                     console.log(error);
-                    return "Hay un error al obtener el nombre";
+                    return "Hay un error al obtener startTime";
                 }
             },
         },
