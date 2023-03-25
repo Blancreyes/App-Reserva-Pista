@@ -9,6 +9,10 @@ export const Perfil_Usuario = () => {
   const [user, setUser] = useState({});
   const params = useParams();
 
+export const handleUpdateUserInfo=(){
+  
+}
+
   useEffect(() => {
     async function user_Info() {
       setUser(await actions.get_usario_data());
@@ -66,7 +70,7 @@ export const Perfil_Usuario = () => {
             <button
               type="submit"
               className="btn btn-success mb-3 m-auto"
-              // onClick={handleUpdateInfo}
+              // onClick={handleUpdateUserInfo}
             >
               Edit Info
             </button>

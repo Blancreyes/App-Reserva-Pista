@@ -6,7 +6,7 @@ const getState = ({
 }) => {
     return {
         store: {
-            url: "https://3001-blancreyes-appreservame-9rrm12j4vvl.ws-eu92.gitpod.io",
+            url: "https://3001-blancreyes-appreservame-9rrm12j4vvl.ws-eu92.gitpod.io/",
             message: null,
             pistas: [],
             // { title: "Piscina",
