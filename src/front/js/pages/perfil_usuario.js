@@ -9,9 +9,11 @@ export const Perfil_Usuario = () => {
   const [user, setUser] = useState({});
   const params = useParams();
 
-export const handleUpdateUserInfo=(){
-  
-}
+  // // const handleUpdateProfile = () => {
+  // //   let name = document.getElementById("name").value;
+  // //   let lastname = document.getElementById("lastname").value;
+  // //   let email = document.getElementById("email").value;
+  // // };
 
   useEffect(() => {
     async function user_Info() {
@@ -28,40 +30,40 @@ export const handleUpdateUserInfo=(){
       <div className="container">
         <form>
           <div className="row mb-3">
-            <label for="inputname" className="col-sm-2 col-form-label">
+            <label for="name" className="col-sm-2 col-form-label">
               Nombre
             </label>
             <div className="col-sm-10">
               <input
                 type="text"
                 className="form-control"
-                id="inputname"
+                id="name"
                 value={user.name}
               />
             </div>
           </div>
           <div className="row mb-3">
-            <label for="inputLastName" className="col-sm-2 col-form-label">
+            <label for="lastName" className="col-sm-2 col-form-label">
               Apellido
             </label>
             <div className="col-sm-10">
               <input
                 type="text"
                 className="form-control"
-                id="inputLastName"
+                id="lastName"
                 value={user.lastname}
               />
             </div>
           </div>
           <div className="row mb-3">
-            <label for="inputEmail3" className="col-sm-2 col-form-label">
+            <label for="email3" className="col-sm-2 col-form-label">
               Email
             </label>
             <div className="col-sm-10">
               <input
                 type="email"
                 className="form-control"
-                id="inputEmail3"
+                id="email3"
                 value={user.email}
               />
             </div>
@@ -70,7 +72,7 @@ export const handleUpdateUserInfo=(){
             <button
               type="submit"
               className="btn btn-success mb-3 m-auto"
-              // onClick={handleUpdateUserInfo}
+              // onClick={handleUpdateProfile}
             >
               Edit Info
             </button>
@@ -90,6 +92,7 @@ export const handleUpdateUserInfo=(){
     </div>
   );
 };
+
 // Perfil_Usuario.propTypes = {
 //   match: PropTypes.object,
 // };

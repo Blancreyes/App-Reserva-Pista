@@ -136,23 +136,50 @@ def handle_consult_reservas_all():
         
     }
     return jsonify(response_body), 200
+
+@api.route('/perfil', methods=['PUT'])
+def handle_update_perfil():
+    #se debe pasar la información a formato json
+    request_body=request.json
+    
+    print(request_body)
+    
+    #se verifica si el perfil existe
+    user=User.query.filter_by(email=request_body["email"]).first()
+    # result=list(map(lambda item: item.serialize(), reservas_info_query))
+ 
+    
+    user.name=request_body["name"]
+    user.lastname=request_body["lastname"]
+    user.email=request_body["email"]
+    
+    db.session.add(user)
+    db.session.commit()
+    response_body = {
+        "msg": "Informacion actualizada correctamente",
+        # "result": result
+        
+    }
+    return jsonify(response_body), 200
     
 @api.route('/reservas', methods=['PUT'])
 def handle_update_reservas():
     #se debe pasar la información a formato json
     request_body=request.json
     
+    request.json['email']
+    
     #se verifica si la reserva ya existe
     reservas_info_query=Reservas.query.filter_by(user_id=request_body["user_id"], id=request_body["id"]).first()
     # result=list(map(lambda item: item.serialize(), reservas_info_query))
- 
     
+        
     reservas_info_query.startTime=request_body["startTime"]
     
     db.session.add(reservas_info_query)
     db.session.commit()
     response_body = {
-        "msg": "Reserva existe",
+        "msg": "Reserva Actualizada",
         # "result": result
         
     }
