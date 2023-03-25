@@ -14,6 +14,7 @@ export const Mis_reservas = () => {
   const [disablePaddle, setDisablePaddle] = useState(false);
   const [disableTenis, setDisableTenis] = useState(false);
   const [disableFutbol, setDisableFutbol] = useState(false);
+  const [reservas, setReservas] = useState({});
 
   const eliminarreservapiscina = () => {
     setDisablePiscina(true);
@@ -38,6 +39,14 @@ export const Mis_reservas = () => {
   const instalacionescalendario = () => {
     navigate("/demo");
   };
+  useEffect(() => {
+    async function reservas_usuario() {
+      setReservas(await actions.reservas_usuario());
+    }
+
+    reservas_usuario();
+  }, []);
+  console.log(setReservas);
 
   // async function handleRecuperarPassword(e) {
   //   let recover = await actions.recover_password(email);
