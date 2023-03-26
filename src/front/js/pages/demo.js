@@ -18,11 +18,11 @@ export const Demo = () => {
   }, []);
 
   return loggedIn ? (
-    <div className="container">
+    <div className="container border border-success mt-3 rounded-4">
       <div className="title">
         <h1 className="title"> ZONA PRIVADA </h1>{" "}
       </div>{" "}
-      <div className="instalaciones ">
+      <div className="instalaciones mt-5 ">
         <h2 className="subtitle ms-2"> Reservar Instalaciones </h2>{" "}
         <ul className="list-group w-50">
           {" "}
