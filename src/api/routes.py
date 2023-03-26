@@ -306,22 +306,19 @@ def get_user_byId():
 
     return jsonify(user.serialize()), 200
 
+# CON ESTE ENDPOINT ELIMINAMOS LAS RESERVAS
+
 @api.route('/perfil', methods=['DELETE'])
-@jwt_required()
-def delete_reservaId():
+def delete_reserva():
     request_body=request.json
-    
-    user_token=get_jwt_identity()
-    
-    reserva_usuario_query = Reservas.query.filter_by(user_id=user_token,pistas_id=pistas_id).first()
-    
-    print(request_body)
-    
-    db.session.delete(reserva_usuario_query)
+
+    reserva_query=Reservas.query.filter_by(user_id=request_body["user_id"], id=request_body["id"]).first()
+
+    db.session.delete(reserva_query)
     db.session.commit()
+  
     response_body = {
-        "msg": "Reserva eliminada correctamente",
-        
-    }
-    return jsonify(reserva_usuario_query(serialize)), 200
+            "msg": "La reserva ha sido eliminada",
+        }
+    return jsonify(response_body), 200
       
