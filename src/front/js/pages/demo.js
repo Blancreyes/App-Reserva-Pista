@@ -48,9 +48,17 @@ export const Demo = () => {
           })}{" "}
         </ul>{" "}
       </div>{" "}
-      <div className="misreservas d-flex">
-        <h2 className="subtitle ms-2"> Mis Reservas </h2>{" "}
-      </div>{" "}
+      <Link
+        to={"/mis_reservas"}
+        style={{
+          textDecoration: "none",
+          color: "#04740ddc",
+        }}
+      >
+        <div className="misreservas d-flex">
+          <h2 className="subtitle ms-2"> Mis Reservas </h2>{" "}
+        </div>{" "}
+      </Link>
       <Link
         to={"/perfil_usuario"}
         style={{
