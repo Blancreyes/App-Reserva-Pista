@@ -8,7 +8,14 @@ const CardReservas = (props) => {
   const eliminarreservaInstalacion = () => {
     setDisableInstalacion(true);
     alert("Tu reserva ha sido anulada.");
+    //actions.delete_usuario_reservas();
   };
+  // useEffect(() => {
+  //   async function eliminarreservaInstalacion() {
+  //     await actions.delete_usario_reservas();
+  //   }
+  //   eliminarreservaInstalacion();
+  // }, []);
 
   return (
     <div className="container-lg">

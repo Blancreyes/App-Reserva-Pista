@@ -13,22 +13,12 @@ export const Mis_reservas = () => {
   };
   useEffect(() => {
     async function reservas_usuario() {
-      //setReservas(await actions.reservas_usuario());
       await actions.get_usario_reservas();
     }
-
     reservas_usuario();
   }, []);
-  //console.log(setReservas);
 
-  const misReservas = store.reservas_usuario;
-  console.log("estas son mis reservas", misReservas);
-  // let nombreru = misReservas.map((np) => np.nombre_pista);
-  // console.log(nombreru);
   return (
-    // {misReservas.map((item,index) => {
-
-    // })}
     <div className="container-lg">
       <div className="fw-bold text-center fs-2 mt-1 mb-0"> MIS RESERVAS </div>{" "}
       <div className="row g-3 mt-0 mb-4  ">

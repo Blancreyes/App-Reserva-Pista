@@ -6,7 +6,7 @@ const getState = ({
 }) => {
     return {
         store: {
-            url: "https://3001-blancreyes-appreservame-l1fh43z878c.ws-eu92.gitpod.io",
+            url: "https://3001-blancreyes-appreservame-nnwun2sh56d.ws-eu92.gitpod.io",
             message: null,
             pistas: [],
             // { title: "Piscina",
@@ -256,6 +256,27 @@ const getState = ({
                     const mytoken = localStorage.getItem("token");
                     // console.log(mytoken);
                     let response = await axios.get(urlserver + "/api/perfil", {
+                        headers: {
+                            Authorization: `Bearer ${mytoken}`,
+                        },
+                    });
+                    setStore({
+                        reservas_usuario: response.data.reservas,
+                    });
+                    console.log("respuesta:", response);
+                    return response.data;
+                } catch (error) {
+                    console.log(error);
+                    return false;
+                }
+            },
+            delete_usario_reservas: async () => {
+                const store = getStore();
+                const urlserver = store.url;
+                try {
+                    const mytoken = localStorage.getItem("token");
+                    // console.log(mytoken);
+                    let response = await axios.delete(urlserver + "/api/perfil", {
                         headers: {
                             Authorization: `Bearer ${mytoken}`,
                         },

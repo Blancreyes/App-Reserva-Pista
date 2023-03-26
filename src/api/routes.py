@@ -305,4 +305,23 @@ def get_user_byId():
       
 
     return jsonify(user.serialize()), 200
+
+@api.route('/perfil', methods=['DELETE'])
+@jwt_required()
+def delete_reservaId():
+    request_body=request.json
+    
+    user_token=get_jwt_identity()
+    
+    reserva_usuario_query = Reservas.query.filter_by(user_id=user_token,pistas_id=pistas_id).first()
+    
+    print(request_body)
+    
+    db.session.delete(reserva_usuario_query)
+    db.session.commit()
+    response_body = {
+        "msg": "Reserva eliminada correctamente",
+        
+    }
+    return jsonify(reserva_usuario_query(serialize)), 200
       
