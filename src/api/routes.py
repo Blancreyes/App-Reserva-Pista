@@ -66,7 +66,7 @@ def login():
     if email != user.email or password != user.password:
         return jsonify({"msg": "Bad email or password"}), 401
 
-    access_token = create_access_token(identity=email)
+    access_token = create_access_token(identity=user.id)
     return jsonify(access_token=access_token)
 
 # Protect a route with jwt_required, which will kick out requests
@@ -95,64 +95,37 @@ def handle_create_reservas():
     
     print(reservas_info_query)
     
-    #Si la reserva no existe, entonces se crea reserva
-    if reservas_info_query is None:
-        reservas=Reservas(
-            user_id=user.id,
-            pistas_id=request_body["pistas_id"],
-            startTime=request_body["startTime"]
-        )
-        
-        db.session.add(reservas)
-        db.session.commit()
+    user=User.query.filter_by(id=user_token).first()
+      
+
+    return jsonify(user.serialize()), 200
+    
+
+@api.route('/reservas/<int:user_id>', methods=['GET'])
+def handle_consult_reservas_byUserId(user_id):
+   
+    #se verifica si la reserva ya existe
+    reservas_info_query=Reservas.query.filter_by(user_id=user_id).all()
+    
+    result=list(map(lambda item: item.serialize(), reservas_info_query))
+    
+    print(result)
+    
+    if reservas_info_query:
         response_body = {
             "msg": "Reserva creada correctamente"
         }
         return jsonify(response_body), 200
     
     else:
-        return jsonify("Esta reserva ya existe"), 400
-    
-#Consultar un reserva
-@api.route('/reservas/<int:user_id>', methods=['GET'])
-def handle_consult_reservas_byUserId(user_id):
-    #se debe pasar la información a formato json
-    request_body=request.json
-    
-    #se verifica si la reserva ya existe
-    reservas_info_query=Reservas.query.filter_by(user_id=user_id).all()
-    result=list(map(lambda item: item.serialize(), reservas_info_query))
-    print(result)
-    
-    # startTime=request_body["startTime"], 
-    
-    #Si la reserva no existe, entonces se crea reserva
-    # if reservas_info_query is None:
-    #     reservas=Reservas(
-    #         user_id=request_body["user_id"],
-    #         pistas_id=request_body["pistas_id"],
-    #         startTime=request_body["startTime"]
-    #     )
-        
-    #     db.session.add(reservas)
-    #     db.session.commit()
-    if reservas_info_query:
-        response_body = {
-            "msg": "Reserva existentes para este usuario",
-            "result": result
-            
-        }
-        return jsonify(response_body), 200
-    else:
         return jsonify("El usuario introducido no posee reservas o no existe"), 400
 
 @api.route('/reservas', methods=['GET'])
 def handle_consult_reservas_all():
-    #se debe pasar la información a formato json
+        
+    reservas_info_query=Reservas.query.filter_by(user_id=User.id).first()
     
     
-    #se verifica si la reserva ya existe
-    reservas_info_query=Reservas.query.all()
     result=list(map(lambda item: item.serialize(), reservas_info_query))
     print(result)
     
@@ -174,17 +147,44 @@ def handle_consult_reservas_all():
         
     }
     return jsonify(response_body), 200
+
+@api.route('/perfil', methods=['PUT'])
+@jwt_required()
+def handle_update_perfil():
+    #se debe pasar la información a formato json
+    request_body=request.json
+    
+    user_id=get_jwt_identity()
+    
+    user=User.query.filter_by(id=user_id).first()
+    
+    print(request_body)
+    
+    user.name=request_body["name"]
+    user.lastname=request_body["lastname"]
+    user.email=request_body["email"]
+    
+    db.session.add(user)
+    db.session.commit()
+    response_body = {
+        "msg": "Informacion actualizada correctamente",
+        # "result": result
+        
+    }
+    return jsonify(response_body), 200
     
 @api.route('/reservas', methods=['PUT'])
 def handle_update_reservas():
     #se debe pasar la información a formato json
     request_body=request.json
     
+    request.json['email']
+    
     #se verifica si la reserva ya existe
     reservas_info_query=Reservas.query.filter_by(user_id=request_body["user_id"], id=request_body["id"]).first()
     # result=list(map(lambda item: item.serialize(), reservas_info_query))
- 
     
+        
     reservas_info_query.startTime=request_body["startTime"]
     
     db.session.add(reservas_info_query)
@@ -203,7 +203,7 @@ def handle_update_reservas():
     #     db.session.add(reservas)
     #     db.session.commit()
     response_body = {
-        "msg": "Reserva existe",
+        "msg": "Reserva Actualizada",
         # "result": result
         
     }
@@ -230,7 +230,7 @@ def recover_password():
 def get_user_data():
     
     current_user = get_jwt_identity()
-    user = User.query.filter_by(email=current_user).first()
+    user = User.query.filter_by(id=current_user).first()
     return jsonify({"result":user.serialize()}), 200
 
 # RECUPERACION DE CONTRASEÑA

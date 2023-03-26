@@ -6,8 +6,14 @@ import { Perfil } from "../component/perfil.jsx";
 
 export const Perfil_Usuario = () => {
   const { store, actions } = useContext(Context);
+  const [data, setData] = useState({});
   const [user, setUser] = useState({});
   const params = useParams();
+
+  const submitNewInfo = (e) => {
+    e.preventDefault();
+    actions.update_usario_data(user);
+  };
 
   useEffect(() => {
     async function user_Info() {
@@ -17,57 +23,54 @@ export const Perfil_Usuario = () => {
     user_Info();
   }, []);
 
-  console.log(user);
-
   return (
     <div className="jumbotron m-auto mt-3">
       <div className="container">
-        <form>
+        <form onSubmit={submitNewInfo}>
           <div className="row mb-3">
-            <label for="inputname" className="col-sm-2 col-form-label">
+            <label for="name" className="col-sm-2 col-form-label">
               Nombre
             </label>
             <div className="col-sm-10">
               <input
                 type="text"
                 className="form-control"
-                id="inputname"
-                value={user.name}
+                id="name"
+                defaultValue={user.name}
+                onChange={(e) => setUser({ ...user, name: e.target.value })}
               />
             </div>
           </div>
           <div className="row mb-3">
-            <label for="inputLastName" className="col-sm-2 col-form-label">
-              Apellidos
+            <label for="lastName" className="col-sm-2 col-form-label">
+              Apellido
             </label>
             <div className="col-sm-10">
               <input
                 type="text"
                 className="form-control"
-                id="inputLastName"
-                value={user.lastname}
+                id="lastName"
+                defaultValue={user.lastname}
+                onChange={(e) => setUser({ ...user, lastname: e.target.value })}
               />
             </div>
           </div>
           <div className="row mb-3">
-            <label for="inputEmail3" className="col-sm-2 col-form-label">
+            <label for="email3" className="col-sm-2 col-form-label">
               Email
             </label>
             <div className="col-sm-10">
               <input
                 type="email"
                 className="form-control"
-                id="inputEmail3"
-                value={user.email}
+                id="email3"
+                defaultValue={user.email}
+                onChange={(e) => setUser({ ...user, email: e.target.value })}
               />
             </div>
           </div>
           <div className="text-center">
-            <button
-              type="submit"
-              className="btn btn-success mb-3 m-auto"
-              // onClick={handleUpdateInfo}
-            >
+            <button type="submit" className="btn btn-success mb-3 m-auto">
               Edit Info
             </button>
           </div>
@@ -86,6 +89,7 @@ export const Perfil_Usuario = () => {
     </div>
   );
 };
+
 // Perfil_Usuario.propTypes = {
 //   match: PropTypes.object,
 // };
