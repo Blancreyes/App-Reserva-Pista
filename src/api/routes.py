@@ -298,8 +298,11 @@ def handle_pistasreservas(id_pista):
 def get_user_byId():
    
     user_token=get_jwt_identity()
+    print(user_token)
     
-    user=User.query.filter_by(email=user_token).first()
+    user=User.query.filter_by(id=user_token).first()
+    print(user)
       
 
     return jsonify(user.serialize()), 200
+      
