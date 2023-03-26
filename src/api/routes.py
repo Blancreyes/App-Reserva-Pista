@@ -66,7 +66,7 @@ def login():
     if email != user.email or password != user.password:
         return jsonify({"msg": "Bad email or password"}), 401
 
-    access_token = create_access_token(identity=email)
+    access_token = create_access_token(identity=user.id)
     return jsonify(access_token=access_token)
 
 @api.route('/user', methods=['GET'])
@@ -95,7 +95,7 @@ def get_user_byId():
    
     user_token=get_jwt_identity()
     
-    user=User.query.filter_by(email=user_token).first()
+    user=User.query.filter_by(id=user_token).first()
       
 
     return jsonify(user.serialize()), 200
@@ -138,16 +138,16 @@ def handle_consult_reservas_all():
     return jsonify(response_body), 200
 
 @api.route('/perfil', methods=['PUT'])
+@jwt_required()
 def handle_update_perfil():
     #se debe pasar la información a formato json
     request_body=request.json
     
-    print(request_body)
+    user_id=get_jwt_identity()
     
-    #se verifica si el perfil existe
-    user=User.query.filter_by(email=request_body["email"]).first()
-    # result=list(map(lambda item: item.serialize(), reservas_info_query))
- 
+    user=User.query.filter_by(id=user_id).first()
+    
+    print(request_body)
     
     user.name=request_body["name"]
     user.lastname=request_body["lastname"]
@@ -206,7 +206,7 @@ def recover_password():
 def get_user_data():
     
     current_user = get_jwt_identity()
-    user = User.query.filter_by(email=current_user).first()
+    user = User.query.filter_by(id=current_user).first()
     return jsonify({"result":user.serialize()}), 200
 
 # RECUPERACION DE CONTRASEÑA

@@ -6,14 +6,14 @@ import { Perfil } from "../component/perfil.jsx";
 
 export const Perfil_Usuario = () => {
   const { store, actions } = useContext(Context);
+  const [data, setData] = useState({});
   const [user, setUser] = useState({});
   const params = useParams();
 
-  // // const handleUpdateProfile = () => {
-  // //   let name = document.getElementById("name").value;
-  // //   let lastname = document.getElementById("lastname").value;
-  // //   let email = document.getElementById("email").value;
-  // // };
+  const submitNewInfo = (e) => {
+    e.preventDefault();
+    actions.update_usario_data(user);
+  };
 
   useEffect(() => {
     async function user_Info() {
@@ -23,12 +23,10 @@ export const Perfil_Usuario = () => {
     user_Info();
   }, []);
 
-  console.log(user);
-
   return (
     <div className="jumbotron m-auto mt-3">
       <div className="container">
-        <form>
+        <form onSubmit={submitNewInfo}>
           <div className="row mb-3">
             <label for="name" className="col-sm-2 col-form-label">
               Nombre
@@ -38,7 +36,8 @@ export const Perfil_Usuario = () => {
                 type="text"
                 className="form-control"
                 id="name"
-                value={user.name}
+                defaultValue={user.name}
+                onChange={(e) => setUser({ ...user, name: e.target.value })}
               />
             </div>
           </div>
@@ -51,7 +50,8 @@ export const Perfil_Usuario = () => {
                 type="text"
                 className="form-control"
                 id="lastName"
-                value={user.lastname}
+                defaultValue={user.lastname}
+                onChange={(e) => setUser({ ...user, lastname: e.target.value })}
               />
             </div>
           </div>
@@ -64,16 +64,13 @@ export const Perfil_Usuario = () => {
                 type="email"
                 className="form-control"
                 id="email3"
-                value={user.email}
+                defaultValue={user.email}
+                onChange={(e) => setUser({ ...user, email: e.target.value })}
               />
             </div>
           </div>
           <div className="text-center">
-            <button
-              type="submit"
-              className="btn btn-success mb-3 m-auto"
-              // onClick={handleUpdateProfile}
-            >
+            <button type="submit" className="btn btn-success mb-3 m-auto">
               Edit Info
             </button>
           </div>
