@@ -312,7 +312,9 @@ def get_user_byId():
 def delete_reserva():
     request_body=request.json
 
-    reserva_query=Reservas.query.filter_by(user_id=request_body["user_id"], id=request_body["id"]).first()
+    reserva_query=Reservas.query.filter_by(id=request_body["id"]).first()
+    if reserva_query is None :
+        return ("La reserva no existe.")
 
     db.session.delete(reserva_query)
     db.session.commit()

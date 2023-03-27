@@ -3,19 +3,17 @@ import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext.js";
 
 const CardReservas = (props) => {
+  const { store, actions } = useContext(Context);
   const [disableInstalacion, setDisableInstalacion] = useState(false);
 
-  const eliminarreservaInstalacion = () => {
-    setDisableInstalacion(true);
-    alert("Tu reserva ha sido anulada.");
-    //actions.delete_usuario_reservas();
-  };
-  // useEffect(() => {
-  //   async function eliminarreservaInstalacion() {
-  //     await actions.delete_usario_reservas();
-  //   }
-  //   eliminarreservaInstalacion();
-  // }, []);
+  async function eliminarreservaInstalacion() {
+    let borrar = await actions?.delete_usuario_reservas(props.id_reservas);
+    console.log(props.id_reservas);
+    if (borrar) {
+      setDisableInstalacion(true);
+      alert("Tu reserva ha sido anulada.");
+    }
+  }
 
   return (
     <div className="container-lg">
