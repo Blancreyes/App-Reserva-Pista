@@ -302,3 +302,21 @@ def handle_pistasreservas(id_pista):
         
     }
     return jsonify(response_body), 200
+
+# CON ESTE ENDPOINT ELIMINAMOS LAS RESERVAS
+
+@api.route('/perfil', methods=['DELETE'])
+def delete_reserva():
+    request_body=request.json
+
+    reserva_query=Reservas.query.filter_by(id=request_body["id"]).first()
+    if reserva_query is None :
+        return ("La reserva no existe.")
+
+    db.session.delete(reserva_query)
+    db.session.commit()
+  
+    response_body = {
+            "msg": "La reserva ha sido eliminada",
+        }
+    return jsonify(response_body), 200
