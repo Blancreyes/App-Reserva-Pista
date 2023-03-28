@@ -6,7 +6,7 @@ const getState = ({
 }) => {
     return {
         store: {
-            url: "https://3001-blancreyes-appreservame-kxnfp5s89np.ws-eu92.gitpod.io",
+            url: "https://3001-blancreyes-appreservame-l1nqm81srbt.ws-eu92.gitpod.io",
             message: null,
             pistas: [],
             // { title: "Piscina",
@@ -14,12 +14,13 @@ const getState = ({
             //   title: "Pista Tenis",
             //   title: "Campo de Futbol",
             // },
+            logged: false,
             startTime: [],
             user_data: [],
             reservas_usuario: [],
         },
         actions: {
-            // Use getActions to call a function within a fuction
+            // // Use getActions to call a function within a fuction
             exampleFunction: () => {
                 getActions().changeColor(0, "green");
             },
@@ -63,6 +64,9 @@ const getState = ({
                     });
                     //   console.log("esta es la respuesta del Login:", response);
                     localStorage.setItem("token", response.data.access_token);
+                    setStore({
+                        logged: true,
+                    });
                     return true;
                 } catch (error) {
                     console.log(error);
@@ -76,6 +80,9 @@ const getState = ({
                 //Aquí habría que colocar la lógica para cerrar la sesión del usuario y  colocar setLoggedIn a false
                 // localStorage.removeItem("token");
                 localStorage.removeItem("token");
+                setStore({
+                    logged: false,
+                });
             },
             altaUsuario: async (name, lastname, email, password) => {
                 const store = getStore();

@@ -29,7 +29,7 @@ const CardReservas = (props) => {
             {props.startTime}
           </span>
         </div>
-        <div class="d-grid gap-1 d-md-block text-center col-1">
+        <div className="d-grid gap-1 d-md-block text-center col-1">
           <button
             id="Piscina"
             className={
