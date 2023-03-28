@@ -58,10 +58,12 @@ const getState = ({
                     const store = getStore();
                     const urlserver = store.url;
                     console.log(urlserver);
-                    let response = await axios.post(urlserver + "/api/login", {
-                        email: email,
-                        password: password,
-                    });
+                    let response = await axios.post(
+                        process.env.BACKEND_URL + "/api/login", {
+                            email: email,
+                            password: password,
+                        }
+                    );
                     //   console.log("esta es la respuesta del Login:", response);
                     localStorage.setItem("token", response.data.access_token);
                     setStore({
@@ -89,12 +91,14 @@ const getState = ({
                 const urlserver = store.url;
                 // console.log(urlserver);
                 try {
-                    let response = await axios.post(urlserver + "/api/user", {
-                        name: name,
-                        lastname: lastname,
-                        email: email,
-                        password: password,
-                    });
+                    let response = await axios.post(
+                        process.env.BACKEND_URL + "/api/user", {
+                            name: name,
+                            lastname: lastname,
+                            email: email,
+                            password: password,
+                        }
+                    );
                     return true;
                 } catch (error) {
                     console.log(error);
@@ -107,11 +111,13 @@ const getState = ({
                 try {
                     const mytoken = localStorage.getItem("token");
                     // console.log(mytoken);
-                    let response = await axios.get(urlserver + "/api/profile", {
-                        headers: {
-                            Authorization: `Bearer ${mytoken}`,
-                        },
-                    });
+                    let response = await axios.get(
+                        process.env.BACKEND_URL + "/api/profile", {
+                            headers: {
+                                Authorization: `Bearer ${mytoken}`,
+                            },
+                        }
+                    );
                     //   console.log("esta es la respuesta de compruebaUsuario:", response);
                     return true;
                 } catch (error) {
@@ -123,7 +129,7 @@ const getState = ({
                 const store = getStore();
                 const urlserver = store.url;
                 try {
-                    let response = await axios.get(urlserver + "/api/user");
+                    let response = await axios.get(process.env.BACKEND_URL + "/api/user");
                     setStore({
                         user_data: response.data,
                     });
@@ -139,11 +145,13 @@ const getState = ({
                 try {
                     const mytoken = localStorage.getItem("token");
                     // console.log(mytoken);
-                    let response = await axios.get(urlserver + "/api/perfil", {
-                        headers: {
-                            Authorization: `Bearer ${mytoken}`,
-                        },
-                    });
+                    let response = await axios.get(
+                        process.env.BACKEND_URL + "/api/perfil", {
+                            headers: {
+                                Authorization: `Bearer ${mytoken}`,
+                            },
+                        }
+                    );
                     console.log("respuesta:", response);
                     return response.data;
                 } catch (error) {
@@ -157,11 +165,14 @@ const getState = ({
                 try {
                     const mytoken = localStorage.getItem("token");
                     // console.log(mytoken);
-                    let response = await axios.put(urlserver + "/api/perfil", user, {
-                        headers: {
-                            Authorization: `Bearer ${mytoken}`,
-                        },
-                    });
+                    let response = await axios.put(
+                        process.env.BACKEND_URL + "/api/perfil",
+                        user, {
+                            headers: {
+                                Authorization: `Bearer ${mytoken}`,
+                            },
+                        }
+                    );
                     console.log("respuesta:", response);
                     return response.data;
                 } catch (error) {
@@ -174,9 +185,11 @@ const getState = ({
                     const store = getStore();
                     const urlserver = store.url;
                     console.log(urlserver);
-                    let response = await axios.post(urlserver + "/api/forgotpassword", {
-                        email: email,
-                    });
+                    let response = await axios.post(
+                        process.env.BACKEND_URL + "/api/forgotpassword", {
+                            email: email,
+                        }
+                    );
                     console.log(response);
                     // localStorage.setItem("token", response.data.access_token);
                     return true;
@@ -194,7 +207,7 @@ const getState = ({
                 try {
                     const mytoken = localStorage.getItem("token");
                     let response = await axios.post(
-                        urlserver + "/api/reservas", {
+                        process.env.BACKEND_URL + "/api/reservas", {
                             pistas_id: instalacion,
                             startTime: dia + hora,
                         }, {
@@ -214,7 +227,9 @@ const getState = ({
                 const store = getStore();
                 const urlserver = store.url;
                 try {
-                    let response = await axios.get(urlserver + "/api/pistas");
+                    let response = await axios.get(
+                        process.env.BACKEND_URL + "/api/pistas"
+                    );
                     setStore({
                         pistas: response.data,
                     });
@@ -229,7 +244,7 @@ const getState = ({
                 const urlserver = store.url;
                 try {
                     let response = await axios.get(
-                        urlserver + "/api/infopista/" + id_pista
+                        process.env.BACKEND_URL + "/api/infopista/" + id_pista
                     );
                     // setStore({ pistas: response.data });
                     // console.log("respuesta de infoPistas", response);
@@ -244,7 +259,7 @@ const getState = ({
                 const urlserver = store.url;
                 try {
                     let response = await axios.get(
-                        urlserver + "/api/pistas/reservas/" + id_pista
+                        process.env.BACKEND_URL + "/api/pistas/reservas/" + id_pista
                     );
                     // setStore({ pistas: response.data });
                     console.log("respuesta de startTime", response.data.result);
@@ -263,11 +278,13 @@ const getState = ({
                 try {
                     const mytoken = localStorage.getItem("token");
                     // console.log(mytoken);
-                    let response = await axios.get(urlserver + "/api/perfil", {
-                        headers: {
-                            Authorization: `Bearer ${mytoken}`,
-                        },
-                    });
+                    let response = await axios.get(
+                        process.env.BACKEND_URL + "/api/perfil", {
+                            headers: {
+                                Authorization: `Bearer ${mytoken}`,
+                            },
+                        }
+                    );
                     setStore({
                         reservas_usuario: response.data.reservas,
                     });
@@ -282,11 +299,13 @@ const getState = ({
                 const store = getStore();
                 const urlserver = store.url;
                 try {
-                    let response = await axios.delete(urlserver + "/api/perfil", {
-                        data: {
-                            id: id,
-                        },
-                    });
+                    let response = await axios.delete(
+                        process.env.BACKEND_URL + "/api/perfil", {
+                            data: {
+                                id: id,
+                            },
+                        }
+                    );
                     console.log("respuesta:", response);
                     return true;
                 } catch (error) {
