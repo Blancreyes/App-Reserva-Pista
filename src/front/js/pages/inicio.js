@@ -8,7 +8,7 @@ export const Inicio = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <div className="main">
+    <div className="main vh-100">
       <div className="call text-center mt-3">
         <p
           style={{

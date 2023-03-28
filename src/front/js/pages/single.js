@@ -19,7 +19,7 @@ export const Single = (props) => {
   // const instalacion = titulo.data;
 
   return store.logged ? (
-    <div className="jumbotron m-auto">
+    <div className="jumbotron m-auto vh-150">
       <div className="tituloinstalacion m-auto">
         <h3 className="  text-center mt-1">
           Este es el calendario de la instalacion: {titulo}{" "}

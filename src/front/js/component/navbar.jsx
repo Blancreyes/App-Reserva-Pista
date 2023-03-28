@@ -9,9 +9,7 @@ export const Navbar = () => {
   return (
     <nav className="barra d-flex w-100">
       <div className="logocont m-2 w-75 flex-grow-1 ">
-        <Link to="/">
-          <img className=" logo " src={logo} />
-        </Link>
+        <img className=" logo " src={logo} />
       </div>
       {store.logged ? (
         <div className="welcome mt-4 w-75">

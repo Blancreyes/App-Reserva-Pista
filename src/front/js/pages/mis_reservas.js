@@ -19,7 +19,7 @@ export const Mis_reservas = () => {
   }, []);
 
   return (
-    <div className="container-lg">
+    <div className="container-lg vh-100">
       <div className="fw-bold text-center fs-2 mt-1 mb-0"> MIS RESERVAS </div>{" "}
       <div className="row g-3 mt-0 mb-4  ">
         <div className="col-1"></div>
@@ -51,14 +51,13 @@ export const Mis_reservas = () => {
           startTime={item.startTime}
         />
       ))}{" "}
-      <div className="d-grid gap-2 col-5 mx-auto my-3">
+      <div className="text-end my-3">
         <button
-          id="boton-guardar"
-          className="btn btn-success  fw-bold"
+          className="btn btn-warning "
           type="button"
           onClick={instalacionescalendario}
         >
-          INSTALACIONES / CALENDARIOS{" "}
+          <strong>Volver Atrás</strong>
         </button>{" "}
       </div>{" "}
     </div>
