@@ -24,7 +24,7 @@ export const Perfil_Usuario = () => {
   }, []);
 
   return (
-    <div className="jumbotron m-auto mt-3">
+    <div className="jumbotron m-auto mt-3 vh-100">
       <div className="container text-center mb-2 ">
         <h2 className="titlepage">EDITAR DATOS DEL PERFIL</h2>
         <form onSubmit={submitNewInfo}>

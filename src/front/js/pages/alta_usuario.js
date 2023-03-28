@@ -47,7 +47,7 @@ export const Alta_usuario = () => {
   }
 
   return (
-    <div className="container-lg">
+    <div className="container-lg vh-100">
       <div className="fw-bold text-center fs-2 mt-3 mb-0"> DATOS USUARIO </div>{" "}
       <div className="row g-3 mt-0 mb-4">
         <div className="col">
@@ -105,14 +105,13 @@ export const Alta_usuario = () => {
           />{" "}
         </div>{" "}
       </div>{" "}
-      <div className="d-grid gap-2 col-5 mx-auto my-3">
+      <div className="d-grid gap-2 col-1 mx-auto my-3">
         <button
-          id="boton-guardar"
-          className="btn btn-success  fw-bold"
+          className="btn btn-success"
           type="button"
           onClick={handleAltaUsuario}
         >
-          GUARDAR{" "}
+          <strong> Guardar </strong>
         </button>{" "}
       </div>{" "}
     </div>

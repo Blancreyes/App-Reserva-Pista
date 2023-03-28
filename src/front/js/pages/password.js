@@ -24,7 +24,7 @@ export const Password = () => {
   }
 
   return (
-    <div className="container-lg">
+    <div className="container-lg vh-100">
       <div className="fw-bold text-center fs-2 mt-3 mb-0">
         RECUPERAR CONTRASEÑA
       </div>

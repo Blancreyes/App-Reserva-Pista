@@ -19,7 +19,7 @@ export const Mis_reservas = () => {
   }, []);
 
   return (
-    <div className="container-lg">
+    <div className="container-lg vh-100">
       <div className="fw-bold text-center fs-2 mt-1 mb-0"> MIS RESERVAS </div>{" "}
       <div className="row g-3 mt-0 mb-4  ">
         <div className="col-1"></div>

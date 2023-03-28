@@ -19,7 +19,7 @@ export const Demo = () => {
   }, []);
 
   return loggedIn ? (
-    <div className="container border border-success mt-3 rounded-4">
+    <div className="container border border-success mt-3 rounded-4 vh-100">
       <div className="title">
         <h1 className="title"> ZONA PRIVADA </h1>{" "}
       </div>
