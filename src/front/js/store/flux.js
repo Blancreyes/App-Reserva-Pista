@@ -80,6 +80,9 @@ const getState = ({
                 //Aquí habría que colocar la lógica para cerrar la sesión del usuario y  colocar setLoggedIn a false
                 // localStorage.removeItem("token");
                 localStorage.removeItem("token");
+                setStore({
+                    logged: false,
+                });
             },
             altaUsuario: async (name, lastname, email, password) => {
                 const store = getStore();
