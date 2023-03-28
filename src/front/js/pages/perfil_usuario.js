@@ -25,7 +25,8 @@ export const Perfil_Usuario = () => {
 
   return (
     <div className="jumbotron m-auto mt-3">
-      <div className="container">
+      <div className="container text-center mb-2 ">
+        <h2 className="titlepage">EDITAR DATOS DEL PERFIL</h2>
         <form onSubmit={submitNewInfo}>
           <div className="row mb-3">
             <label className="col-sm-2 col-form-label">Nombre</label>
@@ -65,7 +66,7 @@ export const Perfil_Usuario = () => {
           </div>
           <div className="text-center">
             <button type="submit" className="btn btn-success mb-3 m-auto">
-              Edit Info
+              Guardar cambios
             </button>
           </div>
         </form>
