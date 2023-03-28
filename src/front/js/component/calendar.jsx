@@ -1,9 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Calendar = (props) => {
   const { store, actions } = useContext(Context);
-
+  const navigate = useNavigate();
   const daysOfWeek = [
     "Lunes ",
     "Martes ",
@@ -34,6 +35,7 @@ export const Calendar = (props) => {
 
     if (reservado) {
       alert("Instalacion reservada");
+      navigate("/mis_reservas");
     } else alert("No pudo realizarse la reserva");
   }
 
@@ -70,8 +72,8 @@ export const Calendar = (props) => {
   const renderRows = () => {
     const rows = hoursOfDay.map((hour, index) => {
       const dayswithhour = daysOfWeek.map((dia) => {
-        console.log(store.startTime?.includes(dia + hour));
-        console.log(store.startTime);
+        // console.log(store.startTime?.includes(dia + hour));
+        // console.log(store.startTime);
         return (
           <td className="border-success rounded-4" key={dia}>
             <div

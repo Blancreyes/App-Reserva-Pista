@@ -28,9 +28,7 @@ export const Perfil_Usuario = () => {
       <div className="container">
         <form onSubmit={submitNewInfo}>
           <div className="row mb-3">
-            <label for="name" className="col-sm-2 col-form-label">
-              Nombre
-            </label>
+            <label className="col-sm-2 col-form-label">Nombre</label>
             <div className="col-sm-10">
               <input
                 type="text"
@@ -42,9 +40,7 @@ export const Perfil_Usuario = () => {
             </div>
           </div>
           <div className="row mb-3">
-            <label for="lastName" className="col-sm-2 col-form-label">
-              Apellido
-            </label>
+            <label className="col-sm-2 col-form-label">Apellido</label>
             <div className="col-sm-10">
               <input
                 type="text"
@@ -56,9 +52,7 @@ export const Perfil_Usuario = () => {
             </div>
           </div>
           <div className="row mb-3">
-            <label for="email3" className="col-sm-2 col-form-label">
-              Email
-            </label>
+            <label className="col-sm-2 col-form-label">Email</label>
             <div className="col-sm-10">
               <input
                 type="email"
@@ -76,16 +70,17 @@ export const Perfil_Usuario = () => {
           </div>
         </form>
       </div>
-
-      <Link className="text-end" to="/demo">
-        <span
-          className="btn btn-warning btn-lg text-end"
-          href="#"
-          role="button"
-        >
-          <strong>Volver Atrás</strong>
-        </span>
-      </Link>
+      <div className="volver text-end me-5">
+        <Link className="text-end" to="/demo">
+          <span
+            className="btn btn-warning btn-lg text-end"
+            href="#"
+            role="button"
+          >
+            <strong>Volver Atrás</strong>
+          </span>
+        </Link>
+      </div>
     </div>
   );
 };

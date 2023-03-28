@@ -18,27 +18,30 @@ export const Single = (props) => {
   console.log(titulo);
   // const instalacion = titulo.data;
 
-  return (
+  return store.logged ? (
     <div className="jumbotron m-auto">
       <div className="tituloinstalacion m-auto">
         <h3 className="  text-center mt-1">
-          Este es el calendario de la instalacion: {titulo}
-        </h3>
-      </div>
+          Este es el calendario de la instalacion: {titulo}{" "}
+        </h3>{" "}
+      </div>{" "}
       <div className="calendarioinstalacion mt-4 text-center">
-        <Calendar instalacion={params.theid} />
-      </div>
+        <Calendar instalacion={params.theid} />{" "}
+      </div>{" "}
       <hr className="my-4" />
-
-      <Link className="text-end" to="/demo">
-        <span
-          className="btn btn-warning btn-lg text-end"
-          href="#"
-          role="button"
-        >
-          <strong>Volver Atrás</strong>
-        </span>
-      </Link>
+      <div className="volver text-end me-5">
+        <Link className="text-end" to="/demo">
+          <span className="btn btn-warning btn-lg " href="#" role="button">
+            <strong> Volver Atrás </strong>{" "}
+          </span>{" "}
+        </Link>{" "}
+      </div>{" "}
+    </div>
+  ) : (
+    <div className="display-5 text-center h-75">
+      <strong>
+        Para visitar esta zona es necesario acceder como usuario registrado{" "}
+      </strong>{" "}
     </div>
   );
 };

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/component.css";
 import logo from "../store/resources/logooval.png";
+import { Context } from "../store/appContext";
 
 export const Navbar = () => {
+  const { store, actions } = useContext(Context);
   return (
     <nav className="barra d-flex w-100">
       <div className="logocont m-2 w-75 flex-grow-1 ">
@@ -11,15 +13,20 @@ export const Navbar = () => {
           <img className=" logo " src={logo} />
         </Link>
       </div>
-
-      <div className="botones mt-3 ml-5 w-75 text-end">
-        <Link to="/acceso" className="btn btn-warning m-1">
-          <strong>Acceder</strong>
-        </Link>
-        <Link to="/alta_usuario" className="btn btn-warning m-1">
-          <strong>Registrarse</strong>
-        </Link>
-      </div>
+      {store.logged ? (
+        <div className="welcome mt-4 w-75">
+          <h3 className="text-warning">Bienvenido a Resérvame</h3>
+        </div>
+      ) : (
+        <div className="botones mt-3 ml-5 w-75 text-end">
+          <Link to="/acceso" className="btn btn-warning m-1">
+            <strong>Acceder</strong>
+          </Link>
+          <Link to="/alta_usuario" className="btn btn-warning m-1">
+            <strong>Registrarse</strong>
+          </Link>
+        </div>
+      )}
 
       <div className="flags w-25 mt-3 me-3 text-end ">
         <Link className="flag1 me-1 align-items-end " to={"./"}>
