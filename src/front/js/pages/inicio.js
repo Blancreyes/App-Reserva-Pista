@@ -1,38 +1,43 @@
-import React, { useContext } from "react";
-import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/home.css";
-import fondo from "../store/resources/teniscourt2.jpg";
 
 export const Inicio = () => {
-  const { store, actions } = useContext(Context);
+  const navigate = useNavigate();
+
+  const hadleRegistro = () => {
+    navigate("/alta_usuario");
+  };
 
   return (
     <div className="main vh-100">
-      <div className="call text-center mt-3">
-        <p
-          style={{
-            textDecoration: "none",
-            color: "#04740ddc",
-            fontSize: "26px",
-          }}
-        >
-          <strong>
-            Entrena con nosotros y lleva tus límites más allá, saca tu mejor
-            versión.
-          </strong>
-        </p>
-      </div>
       <div
-        className="centralcontent text-center mt-3 w-50 "
-        style={{ backgroundImage: `url(${fondo})` }}
-      ></div>
-      <div className="step text-center mt-2">
-        <p>
-          <strong>
-            Regístrate o accede directamente con tu correo de usuario.
-          </strong>
-        </p>
+        className="jumbotron"
+        style={{
+          backgroundImage: `url("https://www.bbva.com/wp-content/uploads/2015/08/tennis-raqueta.imagen-e1439887030593.jpg")`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "100%",
+          height: "500px",
+        }}
+      >
+        <h1 className="display-4 text-light text-center mb-3 p-5">
+          Entrena con nosotros y lleva tus límites más allá, saca tu mejor
+          versión.
+        </h1>
+      </div>
+      <div className="d-flex flex-column align-items-center mt-3 p-3">
+        <button
+          className="btn btn-success btn-lg w-25"
+          href="#"
+          role="button"
+          onClick={hadleRegistro}
+        >
+          Regístrate
+        </button>
+        <br />
+        <Link className="h4 text-dark p-4" to="/acceso">
+          Accede directamente con tu correo de usuario.
+        </Link>
       </div>
     </div>
   );
